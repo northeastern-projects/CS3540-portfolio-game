@@ -53,8 +53,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector2(0f, jumpForce));
         }
-
-        isJumping = false;
     }
     private void ProcessInputs()
     {
@@ -63,10 +61,20 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
         }
+
+        isJumping = false;
     }
     private void FlipCharacter()
     {
         facingRight = !facingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+        {
+            isJumping = false;
+        }
     }
 }
