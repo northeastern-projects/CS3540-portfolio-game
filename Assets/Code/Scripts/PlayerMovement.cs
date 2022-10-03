@@ -8,11 +8,13 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
     public Rigidbody2D rb;
-    private bool facingRight = true;
+    private bool _facingRight = true;
 
-    private float moveDirection;
-
-    private bool isJumping = false;
+    private float _moveDirection;
+    private float _moveVertical;
+    private bool _isJumping;
+    
+    
     // Awake is called after objects are initialized. Called in a random order
     private void Awake()
     {
@@ -20,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         ProcessInputs();
 
@@ -36,11 +38,11 @@ public class PlayerMovement : MonoBehaviour
     private void Animate()
     {
         // Animate
-        if (moveDirection > 0 && !facingRight)
+        if (_moveDirection > 0 && !_facingRight)
         {
             FlipCharacter();
         }
-        else if (moveDirection < 0 && facingRight)
+        else if (_moveDirection < 0 && _facingRight)
         {
             FlipCharacter();
         }
@@ -48,33 +50,36 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
-        if (isJumping)
+        rb.velocity = new Vector2(_moveDirection * moveSpeed, rb.velocity.y);
+        if (!_isJumping && _moveVertical > 0.1f)
         {
-            rb.AddForce(new Vector2(0f, jumpForce));
+            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
     }
     private void ProcessInputs()
     {
-        moveDirection = Input.GetAxis("Horizontal");
-        if (Input.GetButtonDown("Jump"))
-        {
-            isJumping = true;
-        }
-
-        isJumping = false;
+        _moveDirection = Input.GetAxis("Horizontal");
+        _moveVertical = Input.GetAxis("Vertical");
     }
     private void FlipCharacter()
     {
-        facingRight = !facingRight;
+        _facingRight = !_facingRight;
         transform.Rotate(0f, 180f, 0f);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.CompareTag("Platform"))
         {
-            isJumping = false;
+            _isJumping = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            _isJumping = true;
         }
     }
 }
