@@ -2410,6 +2410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 30
+  dashSpeed: 30
   rb: {fileID: 0}
 --- !u!114 &1561479126
 MonoBehaviour:

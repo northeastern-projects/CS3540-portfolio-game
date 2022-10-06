@@ -7,13 +7,14 @@ public class PlayerMovement : MonoBehaviour
 
     public float moveSpeed;
     public float jumpForce;
+    public float dashSpeed;
     public Rigidbody2D rb;
     private bool _facingRight = true;
 
     private float _moveDirection;
     private float _moveVertical;
     private bool _isJumping;
-    
+
     
     // Awake is called after objects are initialized. Called in a random order
     private void Awake()
@@ -55,6 +56,15 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
+
+        if (Input.GetButtonDown("Fire1") && _facingRight)
+        {
+            rb.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Impulse);
+        }
+        else if (Input.GetButtonDown("Fire1") && !_facingRight)
+        {
+            rb.AddForce(new Vector2(-dashSpeed, 0f), ForceMode2D.Impulse);
+        }
     }
     private void ProcessInputs()
     {
@@ -66,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         _facingRight = !_facingRight;
         transform.Rotate(0f, 180f, 0f);
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
