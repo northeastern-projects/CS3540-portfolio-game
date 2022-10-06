@@ -7,12 +7,21 @@ public class PlayerMovement : MonoBehaviour
 
     public float moveSpeed;
     public float jumpForce;
-    public float dashSpeed;
+    
+    // Dashing
+    public float dashForce;
+    private float _dashTime = 0.1f;
+    private bool _canDash = true;
+    private bool _isDashing;
+    public float _dashingCooldown;
+    [SerializeField] private TrailRenderer tr;
+
     public Rigidbody2D rb;
     private bool _facingRight = true;
 
     private float _moveDirection;
     private float _moveVertical;
+    private bool _startDash;
     private bool _isJumping;
 
     
@@ -25,14 +34,29 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (_isDashing)
+        {
+            return;
+        }
+        
         ProcessInputs();
 
         Animate();
+        
+        if (_startDash && _canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     // better for handling physics
     private void FixedUpdate()
     {
+        if (_isDashing)
+        {
+            return;
+        }
+        
         Move();
     }
 
@@ -51,25 +75,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        // Walking
         rb.velocity = new Vector2(_moveDirection * moveSpeed, rb.velocity.y);
+        
+        // Jumping
         if (!_isJumping && _moveVertical > 0.1f)
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-        }
-
-        if (Input.GetButtonDown("Fire1") && _facingRight)
-        {
-            rb.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Impulse);
-        }
-        else if (Input.GetButtonDown("Fire1") && !_facingRight)
-        {
-            rb.AddForce(new Vector2(-dashSpeed, 0f), ForceMode2D.Impulse);
         }
     }
     private void ProcessInputs()
     {
         _moveDirection = Input.GetAxis("Horizontal");
         _moveVertical = Input.GetAxis("Vertical");
+        _startDash = Input.GetKeyDown(KeyCode.LeftControl);
+        
     }
     private void FlipCharacter()
     {
@@ -91,5 +111,21 @@ public class PlayerMovement : MonoBehaviour
         {
             _isJumping = true;
         }
+    }
+
+    private IEnumerator Dash()
+    {
+        _canDash = false;
+        _isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = _facingRight ? new Vector2(dashForce, 0f) : new Vector2(-dashForce, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(_dashTime);
+        tr.emitting = false;
+        rb.gravityScale = originalGravity;
+        _isDashing = false;
+        yield return new WaitForSeconds(_dashingCooldown);
+        _canDash = true;
     }
 }
