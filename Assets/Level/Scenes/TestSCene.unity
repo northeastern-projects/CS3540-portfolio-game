@@ -1055,10 +1055,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aaee86a8ecda1c459fcac9296d4e288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 5
+  sprintSpeed: 15
   jumpForce: 30
-  dashForce: 30
-  _dashingCooldown: 0.6
+  playerAnimator: {fileID: 1561479131}
+  dashForce: 50
+  dashingCooldown: 1
   tr: {fileID: 1561479133}
   rb: {fileID: 1561479127}
 --- !u!114 &1561479126
@@ -1095,8 +1097,8 @@ MonoBehaviour:
   - {fileID: 850806885}
   - {fileID: 1103258679}
   m_Bounds:
-    m_Center: {x: -0.49800897, y: 0.2789898, z: 0}
-    m_Extent: {x: 1.672499, y: 1.3868128, z: 0}
+    m_Center: {x: -0.49800897, y: 0.2791834, z: 0}
+    m_Extent: {x: 1.672499, y: 1.3866191, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
