@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Dashing
     public float dashForce;
-    private const float DashTime = 0.1f;
+    private const float DashTime = 0.5f;
     private bool _canDash = true;
     private bool _isDashing;
     public float dashingCooldown;
@@ -54,15 +54,16 @@ public class PlayerMovement : MonoBehaviour
 
         Animate();
 
-        if (_startDash && _canDash)
-        {
-            StartCoroutine(Dash());
-        }
-
         // Walking and Sprinting
         rb.velocity = _isRunning
             ? new Vector2(_moveDirection * sprintSpeed, rb.velocity.y)
             : new Vector2(_moveDirection * moveSpeed, rb.velocity.y);
+        
+        if (_startDash && _canDash)
+        {
+            StartCoroutine(Dash());
+        }
+        
     }
 
     // better for handling physics
@@ -89,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerAnimator.SetBool(IsJumping, _isJumping);
-        playerAnimator.SetBool(IsDashing, _isDashing);
         playerAnimator.SetBool(IsRunning, _isRunning);
         playerAnimator.SetBool(IsWalking, rb.velocity.magnitude > 0);
     }
@@ -137,14 +137,18 @@ public class PlayerMovement : MonoBehaviour
     {
         _canDash = false;
         _isDashing = true;
+        playerAnimator.SetBool(IsDashing, true);
+        Debug.Log(rb.velocity.magnitude);
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = _facingRight ? new Vector2(dashForce, 0f) : new Vector2(-dashForce, 0f);
+        Debug.Log(rb.velocity.magnitude);
         tr.emitting = true;
         yield return new WaitForSeconds(DashTime);
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         _isDashing = false;
+        playerAnimator.SetBool(IsDashing, false);
         yield return new WaitForSeconds(dashingCooldown);
         _canDash = true;
     }
