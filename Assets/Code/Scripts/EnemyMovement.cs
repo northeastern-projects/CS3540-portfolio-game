@@ -20,6 +20,7 @@ namespace Code.Scripts
         private const float DashTime = 0.5f;
         private bool _canDash = true;
         private bool _isDashing;
+        public float dashingCooldown;
         [SerializeField] private TrailRenderer tr;
 
         //Attacking
@@ -36,6 +37,7 @@ namespace Code.Scripts
         private bool _isMoving;
         private bool _startAttack;
         private static readonly int IsAttacking = Animator.StringToHash("isAttacking");
+        private static readonly int IsDashing = Animator.StringToHash("isDashing");
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
 
@@ -128,7 +130,7 @@ namespace Code.Scripts
         private IEnumerator Attack()
         {
             _canAttack = false;
-            playerAnimator.SetTrigger(Attack1);
+            // playerAnimator.SetTrigger(Attack1);
             // Detect which enemies are in range
             Collider2D[] hitEnemies =
                 Physics2D.OverlapCircleAll(attackPosition.position, attackRange);
@@ -136,7 +138,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.health -= enemy.damageTakenPerHit;
+                enemy.gameObject.GetComponent("PlayerMovement").health -= enemy.gameObject.GetComponent("PlayerMovement").damageTakenPerHit;
                 Debug.Log("Hit " + enemy.name);
             }
             
