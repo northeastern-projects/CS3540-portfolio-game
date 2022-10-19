@@ -138,7 +138,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.gameObject.GetComponent("PlayerMovement").health -= enemy.gameObject.GetComponent("PlayerMovement").damageTakenPerHit;
+               // enemy.gameObject.GetComponent("PlayerMovement").health -= enemy.gameObject.GetComponent("PlayerMovement").damageTakenPerHit;
                 Debug.Log("Hit " + enemy.name);
             }
             

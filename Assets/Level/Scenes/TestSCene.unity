@@ -1528,6 +1528,9 @@ MonoBehaviour:
   sprintSpeed: 15
   jumpForce: 30
   playerAnimator: {fileID: 1561479131}
+  health: 200
+  damageTakenPerHit: 10
+  damageDealtPerHit: 15
   dashForce: 20
   dashingCooldown: 1
   tr: {fileID: 1561479133}

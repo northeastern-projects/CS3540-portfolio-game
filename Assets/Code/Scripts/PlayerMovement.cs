@@ -45,6 +45,7 @@ namespace Code.Scripts
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int Attack1 = Animator.StringToHash("AttackTrigger");
+        private static readonly int FlipChar = Animator.StringToHash("FlipChar");
 
 
         // Awake is called after objects are initialized. Called in a random order
@@ -97,11 +98,11 @@ namespace Code.Scripts
             // Animate
             if (_moveDirection > 0 && !_facingRight)
             {
-                FlipCharacter();
+                gameObject.transform.localScale = new Vector3(-1, 1, 1);
             }
             else if (_moveDirection < 0 && _facingRight)
             {
-                FlipCharacter();
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
             }
 
             playerAnimator.SetBool(IsJumping, _isJumping);
