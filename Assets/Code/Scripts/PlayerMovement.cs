@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -170,12 +169,13 @@ namespace Code.Scripts
             _canAttack = false;
             playerAnimator.SetTrigger(Attack1);
             // Detect which enemies are in range
-            Collider2D[] hitEnemies =
-                Physics2D.OverlapCircleAll(attackPosition.position, attackRange);
+            var hitEnemies =
+                Physics2D.OverlapCircleAll(attackPosition.position, attackRange, LayerMask.GetMask("Enemy"));
             
             // Damage detected enemies
-            foreach (Collider2D enemy in hitEnemies)
+            foreach (var enemy in hitEnemies)
             {
+                // replace this log with damage once it is added. The output is just to make sure it is working properly
                 Debug.Log("Hit " + enemy.name);
             }
             
