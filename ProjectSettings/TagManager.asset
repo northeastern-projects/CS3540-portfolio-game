@@ -8,6 +8,7 @@ TagManager:
   - Background
   - Enemy
   - Ladder
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - Ground
   - Platform
-  - 
+  - PlayerInteractables
   - 
   - 
   - 
