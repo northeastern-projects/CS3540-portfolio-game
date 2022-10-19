@@ -4,26 +4,22 @@ using UnityEngine;
 
 namespace Code.Scripts
 {
-    public class PlayerMovement : MonoBehaviour
+    public class EnemyMovement : MonoBehaviour
     {
         public float moveSpeed;
-        public float sprintSpeed;
-        public float jumpForce;
+        public float attackSpeed;
+        [SerializeField] private Animator playerAnimator;
 
-        [SerializeField] [Tooltip("Insert Animator Controller")]
-        private Animator playerAnimator;
-
-		// Damage
-		public float health = 200.0f;
-		public float damageTakenPerHit = 10f;
-		public float damageDealtPerHit = 15f;
+        // Damage
+        public float health = 200.0f;
+        public float damageTakenPerHit = 10f;
+        public float damageDealtPerHit = 15f;
 
         // Dashing
         public float dashForce;
         private const float DashTime = 0.5f;
         private bool _canDash = true;
         private bool _isDashing;
-        public float dashingCooldown;
         [SerializeField] private TrailRenderer tr;
 
         //Attacking
@@ -33,19 +29,14 @@ namespace Code.Scripts
         public float attackRange;
 
         public Rigidbody2D rb;
-        private bool _facingRight = true;
+        private bool _facingRight = false;
 
         private float _moveDirection;
-        private float _moveVertical;
         private bool _startDash;
-        private bool _isJumping;
-        private bool _isRunning;
+        private bool _isMoving;
         private bool _startAttack;
-        private static readonly int IsJumping = Animator.StringToHash("isJumping");
-        private static readonly int IsDashing = Animator.StringToHash("isDashing");
-        private static readonly int IsWalking = Animator.StringToHash("isWalking");
-        private static readonly int IsRunning = Animator.StringToHash("isRunning");
-        private static readonly int Attack1 = Animator.StringToHash("AttackTrigger");
+        private static readonly int IsAttacking = Animator.StringToHash("isAttacking");
+        private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
 
         // Awake is called after objects are initialized. Called in a random order
@@ -57,18 +48,21 @@ namespace Code.Scripts
         // Update is called once per frame
         private void Update()
         {
-            if (_isDashing)
+            if (health <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+
+                if (_isDashing)
             {
                 return;
             }
-
-            ProcessInputs();
-
+            
             Animate();
 
-            // Walking and Sprinting
-            rb.velocity = _isRunning
-                ? new Vector2(_moveDirection * sprintSpeed, rb.velocity.y)
+            // Walking and Attacking
+            rb.velocity = _isDashing
+                ? new Vector2(_moveDirection * attackSpeed, rb.velocity.y)
                 : new Vector2(_moveDirection * moveSpeed, rb.velocity.y);
 
             if (_startDash && _canDash)
@@ -89,8 +83,6 @@ namespace Code.Scripts
             {
                 return;
             }
-
-            Move();
         }
 
         private void Animate()
@@ -104,50 +96,14 @@ namespace Code.Scripts
             {
                 FlipCharacter();
             }
-
-            playerAnimator.SetBool(IsJumping, _isJumping);
-            playerAnimator.SetBool(IsRunning, _isRunning);
-            playerAnimator.SetBool(IsWalking, rb.velocity.magnitude > 0);
-        }
-
-        private void Move()
-        {
-            // Jumping
-            if (!_isJumping && _moveVertical > 0.1f)
-            {
-                rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            }
-        }
-
-        private void ProcessInputs()
-        {
-            _moveDirection = Input.GetAxis("Horizontal");
-            _moveVertical = Input.GetAxis("Vertical");
-            _startDash = Input.GetKeyDown(KeyCode.LeftControl);
-            _isRunning = Input.GetKey(KeyCode.LeftShift);
-            _startAttack = Input.GetMouseButtonDown(0);
+            
+            playerAnimator.SetBool(IsMoving, _isMoving);
         }
 
         private void FlipCharacter()
         {
             _facingRight = !_facingRight;
             transform.Rotate(0f, 180f, 0f);
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.CompareTag("Platform"))
-            {
-                _isJumping = false;
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            if (collision.gameObject.CompareTag("Platform"))
-            {
-                _isJumping = true;
-            }
         }
 
         private IEnumerator Dash()
@@ -180,7 +136,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-				enemy.health -= enemy.damageTakenPerHit;
+                enemy.health -= enemy.damageTakenPerHit;
                 Debug.Log("Hit " + enemy.name);
             }
             
