@@ -32,7 +32,7 @@ public class LevelGeneration : MonoBehaviour
         
         int randStartingPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartingPos].position;  
-        Instantiate(rooms[0], transform.position, Quaternion.identity);
+        Instantiate(rooms[1], transform.position, Quaternion.identity);
         
         //randomly assign direction to 1,2,3,4,5, or 6
         direction = Random.Range(1, 6);
