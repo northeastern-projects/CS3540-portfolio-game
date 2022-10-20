@@ -627,6 +627,7 @@ GameObject:
   - component: {fileID: 3365550204355594986}
   - component: {fileID: 3365550204355594988}
   - component: {fileID: 3365550204355594991}
+  - component: {fileID: 8401623976061527570}
   m_Layer: 0
   m_Name: Sequoia
   m_TagString: Untagged
@@ -759,7 +760,7 @@ BoxCollider2D:
   m_Offset: {x: -0.09, y: -1.12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
+    pivot: {x: 0.53163487, y: 0.35777313}
     oldSize: {x: 5.8166666, y: 4.09}
     newSize: {x: 5.8166666, y: 4.09}
     adaptiveTilingThreshold: 0.5
@@ -803,8 +804,8 @@ MonoBehaviour:
   - {fileID: 3365550203946911060}
   - {fileID: 3365550204157421830}
   m_Bounds:
-    m_Center: {x: -0.49800885, y: 0.2791835, z: 0}
-    m_Extent: {x: 1.6724988, y: 1.3866194, z: 0}
+    m_Center: {x: -0.4980091, y: 0.2791835, z: 0}
+    m_Extent: {x: 1.6724991, y: 1.3866191, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -994,6 +995,20 @@ MonoBehaviour:
     showGizmo: 1
   - color: {r: 0, g: 1, b: 0, a: 1}
     showGizmo: 1
+--- !u!114 &8401623976061527570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3365550204355594978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b84ad8f9a98ca45965907d70b24ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsText: {fileID: 0}
+  heartsText: {fileID: 0}
 --- !u!1 &3365550204570819902
 GameObject:
   m_ObjectHideFlags: 0
