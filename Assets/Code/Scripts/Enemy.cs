@@ -17,6 +17,7 @@ namespace Code.Scripts
         {
             GetComponent<Health>().SetHealth(data.health);
             player = GameObject.FindWithTag("Player");
+            //TODO: If no player, end the game.
         }
         
         // Update is called once per frame
@@ -33,12 +34,13 @@ namespace Code.Scripts
                 Vector3 theScale = transform.localScale;
                 theScale.x *= -1;
                 transform.localScale = theScale;
+                facingRight = !facingRight;
             }
         }
 
         private void Move()
         {
-            if (Mathf.Abs(transform.position.x - player.transform.position.x) > data.buffer)
+            if (Mathf.Abs(transform.position.x - player.transform.position.x) > data.buffer && player.GetComponent<PlayerMovement>().GetState() != "sneaking")
             {
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y),
                     data.moveSpeed * Time.deltaTime);
@@ -47,15 +49,9 @@ namespace Code.Scripts
 
         private void OnTriggerStay2D(Collider2D collider)
         {
-            if (collider.CompareTag("Player"))
+            if (collider.CompareTag("Player") && collider.GetComponent<Health>() && canAttack)
             {
-                if (collider.GetComponent<Health>())
-                {
-                    if (canAttack)
-                    {
-                        StartCoroutine(Attack(collider));
-                    }
-                }
+                StartCoroutine(Attack(collider));
             }
         }
 
