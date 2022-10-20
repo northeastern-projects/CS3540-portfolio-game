@@ -34,12 +34,13 @@ namespace Code.Scripts
                 Vector3 theScale = transform.localScale;
                 theScale.x *= -1;
                 transform.localScale = theScale;
+                facingRight = !facingRight;
             }
         }
 
         private void Move()
         {
-            if (Mathf.Abs(transform.position.x - player.transform.position.x) > data.buffer)
+            if (Mathf.Abs(transform.position.x - player.transform.position.x) > data.buffer && player.GetComponent<PlayerMovement>().GetState() != "sneaking")
             {
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y),
                     data.moveSpeed * Time.deltaTime);
