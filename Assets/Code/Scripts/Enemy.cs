@@ -13,9 +13,8 @@ namespace Code.Scripts
         // The player
         private GameObject player;
 
-        void Awake()
+        void Start()
         {
-            Debug.Log("Awake");
             GetComponent<Health>().SetHealth(data.health);
             player = GameObject.FindWithTag("Player");
         }
