@@ -18,4 +18,4 @@ MonoBehaviour:
   attackSpeed: 8
   height: -1.75
   buffer: 3
-  attackCooldown: 3
+  attackCooldown: 1
