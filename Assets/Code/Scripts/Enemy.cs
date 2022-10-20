@@ -20,13 +20,16 @@ namespace Code.Scripts
         // Update is called once per frame
         void Update()
         {
-            Swarm();
+            Move();
         }
 
-        private void Swarm()
+        private void Move()
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position,
-                data.moveSpeed * Time.deltaTime);
+            if (Mathf.Abs(transform.position.x - player.transform.position.x) > data.buffer)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, data.height),
+                    data.moveSpeed * Time.deltaTime);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -35,6 +38,7 @@ namespace Code.Scripts
             {
                 if (collider.GetComponent<Health>())
                 {
+                    //TODO: Attack animation
                     collider.GetComponent<Health>().Damage(data.damage);
                 }
             }
