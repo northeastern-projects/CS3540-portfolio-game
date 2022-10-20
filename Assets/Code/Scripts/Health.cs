@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public void Damage(int amount)
     {
         this.health -= amount;
+        StartCoroutine(DamageEffect(Color.red));
         if (health <= 0)
         {
             Die();
@@ -24,5 +25,12 @@ public class Health : MonoBehaviour
     {
         Debug.Log("Dead!");
         Destroy(this.gameObject);
+    }
+    
+    private IEnumerator DamageEffect(Color color)
+    {
+        GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
