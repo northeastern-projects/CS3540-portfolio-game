@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8824522305067804924}
   - component: {fileID: 8120738583022234108}
   m_Layer: 0
-  m_Name: ItemSpawner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61508b63010104852ab8502251fa803c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 2720506639465055477, guid: 208cc070952642e4284f203e3d7df2c5, type: 3}
+  spawnChance: 0.5
+  items: []

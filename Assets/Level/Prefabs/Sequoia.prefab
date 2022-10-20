@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 3365550204355594988}
   - component: {fileID: 3365550204355594991}
   m_Layer: 0
-  m_Name: sequoia_draft (1)
+  m_Name: Sequoia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4722,7 +4722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3365550204355594978, guid: 700ebba7c362b4dd387744cbbae86287, type: 3}
       propertyPath: m_Name
-      value: sequoia_draft (1)
+      value: Sequoia
       objectReference: {fileID: 0}
     - target: {fileID: 3365550204355594978, guid: 700ebba7c362b4dd387744cbbae86287, type: 3}
       propertyPath: m_Layer
