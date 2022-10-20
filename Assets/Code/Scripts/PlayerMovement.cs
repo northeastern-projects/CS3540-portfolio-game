@@ -13,10 +13,8 @@ namespace Code.Scripts
         [SerializeField] [Tooltip("Insert Animator Controller")]
         private Animator playerAnimator;
 
-		// Damage
-		public float health = 200.0f;
-		public float damageTakenPerHit = 10f;
-		public float damageDealtPerHit = 15f;
+		//Attacking
+		[SerializeField] private int attackDamage = 20;
 
         // Dashing
         public float dashForce;
@@ -180,7 +178,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-				enemy.health -= enemy.damageTakenPerHit;
+				enemy.GetComponent<Health>().Damage(attackDamage);
                 Debug.Log("Hit " + enemy.name);
             }
             
