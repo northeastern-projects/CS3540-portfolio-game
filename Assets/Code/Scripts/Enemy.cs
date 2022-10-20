@@ -11,10 +11,11 @@ namespace Code.Scripts
         // The player
         private GameObject player;
 
-        void Start()
+        void Awake()
         {
+            Debug.Log("Awake");
             GetComponent<Health>().SetHealth(data.health);
-            player = GameObject.FindGameObjectWithTag("Player");
+            player = GameObject.FindWithTag("Player");
         }
         
         // Update is called once per frame

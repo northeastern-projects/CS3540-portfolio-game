@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550202944243824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550202945127506}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203009294872}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203031020174}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203166382550}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3365550203292761124}
   - component: {fileID: 3365550203292761125}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: New LimbSolver2D (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203295295639}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203320147958}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203511831025}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203633462977}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203636720019}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_25
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203748622092}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203802076820}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550203946911060}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_26
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3365550204037911504}
   - component: {fileID: 3365550204037911505}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: New LimbSolver2D (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550204157421830}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550204316906746}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,9 +628,9 @@ GameObject:
   - component: {fileID: 3365550204355594988}
   - component: {fileID: 3365550204355594991}
   - component: {fileID: 8401623976061527570}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sequoia
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -760,7 +760,7 @@ BoxCollider2D:
   m_Offset: {x: -0.09, y: -1.12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.53163487, y: 0.35777313}
+    pivot: {x: 0, y: 0}
     oldSize: {x: 5.8166666, y: 4.09}
     newSize: {x: 5.8166666, y: 4.09}
     adaptiveTilingThreshold: 0.5
@@ -804,8 +804,8 @@ MonoBehaviour:
   - {fileID: 3365550203946911060}
   - {fileID: 3365550204157421830}
   m_Bounds:
-    m_Center: {x: -0.4980091, y: 0.2791835, z: 0}
-    m_Extent: {x: 1.6724991, y: 1.3866191, z: 0}
+    m_Center: {x: -0.49800885, y: 0.2791835, z: 0}
+    m_Extent: {x: 1.6724988, y: 1.3866194, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1019,7 +1019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3365550204570819872}
   - component: {fileID: 3365550204570819873}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: New LimbSolver2D (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550204618051458}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1114,7 +1114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550204674626019}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550204818423366}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365550204980711417}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bone_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2046745869112387879}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttackPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
