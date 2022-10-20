@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,10 +13,8 @@ namespace Code.Scripts
         [SerializeField] [Tooltip("Insert Animator Controller")]
         private Animator playerAnimator;
 
-		// Damage
-		public float health = 200.0f;
-		public float damageTakenPerHit = 10f;
-		public float damageDealtPerHit = 15f;
+		//Attacking
+		[SerializeField] private int attackDamage = 20;
 
         // Dashing
         public float dashForce;
@@ -101,7 +100,6 @@ namespace Code.Scripts
             }
             else if (_moveDirection < 0 && _facingRight)
             {
-                
                 FlipCharacter();
             }
 
@@ -131,10 +129,7 @@ namespace Code.Scripts
         private void FlipCharacter()
         {
             _facingRight = !_facingRight;
-            //transform.Rotate(0f, 180f, 0f);
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+            transform.Rotate(0f, 180f, 0f);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -177,17 +172,13 @@ namespace Code.Scripts
             _canAttack = false;
             playerAnimator.SetTrigger(Attack1);
             // Detect which enemies are in range
-            var hitEnemies =
-                Physics2D.OverlapCircleAll(attackPosition.position, attackRange, LayerMask.GetMask("Enemy"));
+            Collider2D[] hitEnemies =
+                Physics2D.OverlapCircleAll(attackPosition.position, attackRange);
             
             // Damage detected enemies
-            foreach (var enemy in hitEnemies)
+            foreach (Collider2D enemy in hitEnemies)
             {
-
-                // replace this log with damage once it is added. The output is just to make sure it is working properly
-
-				//enemy.health -= enemy.damageTakenPerHit;
-
+				enemy.GetComponent<Health>().Damage(attackDamage);
                 Debug.Log("Hit " + enemy.name);
             }
             
