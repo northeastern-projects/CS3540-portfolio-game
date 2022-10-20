@@ -7,6 +7,7 @@ namespace Code.Scripts
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private EnemyData data;
+        private bool canAttack = true;
 
         // The player
         private GameObject player;
@@ -33,16 +34,29 @@ namespace Code.Scripts
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collider)
+        private void OnTriggerStay2D(Collider2D collider)
         {
             if (collider.CompareTag("Player"))
             {
                 if (collider.GetComponent<Health>())
                 {
-                    //TODO: Attack animation
-                    collider.GetComponent<Health>().Damage(data.damage);
+                    if (canAttack)
+                    {
+                        StartCoroutine(Attack(collider));
+                    }
                 }
             }
+        }
+
+        private IEnumerator Attack(Collider2D collider)
+        {
+            canAttack = false;
+            
+            //TODO: Attack animation
+            collider.GetComponent<Health>().Damage(data.damage);
+            yield return new WaitForSeconds(data.attackCooldown);
+            
+            canAttack = true;
         }
     }
 }
