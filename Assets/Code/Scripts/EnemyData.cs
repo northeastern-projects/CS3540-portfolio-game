@@ -9,4 +9,8 @@ public class EnemyData : ScriptableObject
     public int damage;
     public int moveSpeed;
     public int attackSpeed;
+    public float height;
+    
+    //distance between player and enemy when enemy is attacking
+    public float buffer;
 }
