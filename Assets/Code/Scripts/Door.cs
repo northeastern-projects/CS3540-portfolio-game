@@ -24,7 +24,7 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isPlayerTouchingDoor && Input.GetAxis("Vertical") > 0.0f)
+        if (_isPlayerTouchingDoor && Input.GetKeyDown("w"))
         {
             // Enter door (currently teleport up one floor)
             _player.position += teleportDistance;

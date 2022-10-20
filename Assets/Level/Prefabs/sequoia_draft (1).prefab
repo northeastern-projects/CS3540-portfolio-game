@@ -822,8 +822,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   sprintSpeed: 15
-  jumpSpeed: 0
+  jumpSpeed: 30
   playerAnimator: {fileID: 3365550204355594986}
+  attackDamage: 20
   dashForce: 20
   dashingCooldown: 1
   tr: {fileID: 3365550204355594988}

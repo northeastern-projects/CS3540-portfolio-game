@@ -68,19 +68,20 @@ namespace Code.Scripts
             }
 
             ProcessInputs();
+            
+            Move();
 
             Animate();
-
+            
             // Walking and Sprinting
-            rb.velocity = _isRunning
-                ? new Vector2(_moveDirection * sprintSpeed, rb.velocity.y)
-                : new Vector2(_moveDirection * moveSpeed, rb.velocity.y);
+            var speed = _isRunning ? sprintSpeed : moveSpeed;
+            rb.velocity = new Vector2(_moveDirection * speed, rb.velocity.y);
 
             // Ladder climbing
-            if (_isOnLadder && (_isClimbingLadder || _moveVertical != 0.0f))
+            if (_isOnLadder && (_isClimbingLadder || _moveVertical != 0.0f) && rb.velocity.y < speed)
             {
                 rb.gravityScale = 0.0f;
-                rb.velocity = new Vector2(rb.velocity.x, _moveVertical * moveSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, _moveVertical * speed);
                 _isClimbingLadder = true;
             }
             else
@@ -111,7 +112,9 @@ namespace Code.Scripts
                 return;
             }
 
-            Move();
+            playerAnimator.SetBool(IsJumping, _isJumping);
+            playerAnimator.SetBool(IsRunning, _isRunning);
+            playerAnimator.SetBool(IsWalking, rb.velocity.x != 0.0f);
         }
 
         private void Animate()
@@ -126,9 +129,7 @@ namespace Code.Scripts
                 FlipCharacter();
             }
 
-            playerAnimator.SetBool(IsJumping, _isJumping);
-            playerAnimator.SetBool(IsRunning, _isRunning);
-            playerAnimator.SetBool(IsWalking, rb.velocity.magnitude > 0);
+
         }
 
         private void Move()
@@ -139,7 +140,9 @@ namespace Code.Scripts
             var layerMask = LayerMask.GetMask("Ground", "Platform");
             bool grounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y/2, layerMask);
             bool inPlatform = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y/2 - 0.3f, layerMask);
-            if (_moveVertical > 0.1f && grounded && !inPlatform)
+            //Debug.Log($"Grounded: {grounded}, InPlatform: {inPlatform}");
+            
+            if (Input.GetKeyDown("w") && grounded && !inPlatform)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             }
@@ -157,7 +160,9 @@ namespace Code.Scripts
         private void FlipCharacter()
         {
             _facingRight = !_facingRight;
-            transform.Rotate(0f, 180f, 0f);
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

@@ -16,12 +16,11 @@ TagManager:
   - Player
   - Water
   - UI
-  - Enemy
   - Ground
   - Platform
   - PlayerInteractables
   - Room
-  - 
+  - Enemy
   - 
   - 
   - 

@@ -491,6 +491,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 6383820417232839018, guid: cf031ea9ac3bc4bda95200d2b9d2742e, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6383820417232839018, guid: cf031ea9ac3bc4bda95200d2b9d2742e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1441630653
+      objectReference: {fileID: 0}
     - target: {fileID: 8580492536488024865, guid: cf031ea9ac3bc4bda95200d2b9d2742e, type: 3}
       propertyPath: teleportDistance.y
       value: 20
