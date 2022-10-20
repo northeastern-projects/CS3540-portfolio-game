@@ -7,6 +7,8 @@ TagManager:
   - Platform
   - Background
   - Enemy
+  - Ladder
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -14,6 +16,10 @@ TagManager:
   - Player
   - Water
   - UI
+  - Ground
+  - Platform
+  - PlayerInteractables
+  - Room
   - Enemy
   - 
   - 
@@ -36,14 +42,16 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2276126597
+    locked: 0
+  - name: Platforms
+    uniqueID: 2853336643
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
-    uniqueID: 2853336643
+  - name: Foreground
+    uniqueID: 2022253489
     locked: 0

@@ -8,7 +8,7 @@ namespace Code.Scripts
     {
         public float moveSpeed;
         public float sprintSpeed;
-        public float jumpForce;
+        public float jumpSpeed;
 
         [SerializeField] [Tooltip("Insert Animator Controller")]
         private Animator playerAnimator;
@@ -31,6 +31,9 @@ namespace Code.Scripts
         public float attackRange;
 
         public Rigidbody2D rb;
+        private float _rbGravity;
+
+        private CapsuleCollider2D _capsuleCollider;
         private bool _facingRight = true;
 
         private float _moveDirection;
@@ -38,6 +41,8 @@ namespace Code.Scripts
         private bool _startDash;
         private bool _isJumping;
         private bool _isRunning;
+        private bool _isOnLadder;
+        private bool _isClimbingLadder;
         private bool _startAttack;
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsDashing = Animator.StringToHash("isDashing");
@@ -50,6 +55,8 @@ namespace Code.Scripts
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            _rbGravity = rb.gravityScale;
+            _capsuleCollider = GetComponent<CapsuleCollider2D>();
         }
 
         // Update is called once per frame
@@ -61,13 +68,30 @@ namespace Code.Scripts
             }
 
             ProcessInputs();
+            
+            Move();
 
             Animate();
-
+            
             // Walking and Sprinting
-            rb.velocity = _isRunning
-                ? new Vector2(_moveDirection * sprintSpeed, rb.velocity.y)
-                : new Vector2(_moveDirection * moveSpeed, rb.velocity.y);
+            var speed = _isRunning ? sprintSpeed : moveSpeed;
+            rb.velocity = new Vector2(_moveDirection * speed, rb.velocity.y);
+
+            // Ladder climbing
+            if (_isOnLadder && (_isClimbingLadder || _moveVertical != 0.0f) && rb.velocity.y < speed)
+            {
+                rb.gravityScale = 0.0f;
+                rb.velocity = new Vector2(rb.velocity.x, _moveVertical * speed);
+                _isClimbingLadder = true;
+            }
+            else
+            {
+                rb.gravityScale = _rbGravity;
+                _isClimbingLadder = false;
+            }
+            
+            // Fall through platforms when holding down
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), _moveVertical < 0.0f);
 
             if (_startDash && _canDash)
             {
@@ -88,7 +112,9 @@ namespace Code.Scripts
                 return;
             }
 
-            Move();
+            playerAnimator.SetBool(IsJumping, _isJumping);
+            playerAnimator.SetBool(IsRunning, _isRunning);
+            playerAnimator.SetBool(IsWalking, rb.velocity.x != 0.0f);
         }
 
         private void Animate()
@@ -103,17 +129,22 @@ namespace Code.Scripts
                 FlipCharacter();
             }
 
-            playerAnimator.SetBool(IsJumping, _isJumping);
-            playerAnimator.SetBool(IsRunning, _isRunning);
-            playerAnimator.SetBool(IsWalking, rb.velocity.magnitude > 0);
+
         }
 
         private void Move()
         {
+            
             // Jumping
-            if (!_isJumping && _moveVertical > 0.1f)
+            var origin = rb.position;
+            var layerMask = LayerMask.GetMask("Ground", "Platform");
+            bool grounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y/2, layerMask);
+            bool inPlatform = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y/2 - 0.3f, layerMask);
+            //Debug.Log($"Grounded: {grounded}, InPlatform: {inPlatform}");
+            
+            if (Input.GetKeyDown("w") && grounded && !inPlatform)
             {
-                rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             }
         }
 
@@ -129,7 +160,9 @@ namespace Code.Scripts
         private void FlipCharacter()
         {
             _facingRight = !_facingRight;
-            transform.Rotate(0f, 180f, 0f);
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -138,6 +171,22 @@ namespace Code.Scripts
             {
                 _isJumping = false;
             }
+            else if (collision.gameObject.CompareTag("Ladder"))
+            {
+                _isOnLadder = true;
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Platform"))
+            {
+                _isJumping = false;
+            }
+            else if (collision.gameObject.CompareTag("Ladder"))
+            {
+                _isOnLadder = true;
+            }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -145,6 +194,10 @@ namespace Code.Scripts
             if (collision.gameObject.CompareTag("Platform"))
             {
                 _isJumping = true;
+            }
+            else if (collision.gameObject.CompareTag("Ladder"))
+            {
+                _isOnLadder = false;
             }
         }
 
@@ -174,14 +227,14 @@ namespace Code.Scripts
             // Detect which enemies are in range
             Collider2D[] hitEnemies =
                 Physics2D.OverlapCircleAll(attackPosition.position, attackRange);
-            
+
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
 				enemy.GetComponent<Health>().Damage(attackDamage);
                 Debug.Log("Hit " + enemy.name);
             }
-            
+
             yield return new WaitForSeconds(attackCooldown);
             _canAttack = true;
         }
@@ -192,6 +245,7 @@ namespace Code.Scripts
             {
                 return;
             }
+
             Gizmos.DrawWireSphere(attackPosition.position, attackRange);
         }
     }
