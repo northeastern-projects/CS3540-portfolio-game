@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public Vector2 teleportDistance = new Vector2(0.0f, 10.0f);
 
     private bool _isPlayerTouchingDoor = false;
-    
+    private Rigidbody2D _player;
+
+    private void Awake()
+    {
+        _player = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,19 +24,23 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_isPlayerTouchingDoor && Input.GetAxis("Vertical") > 0.0f)
+        {
+            // Enter door (currently teleport up one floor)
+            _player.position += teleportDistance;
+            _isPlayerTouchingDoor = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Door"))
-        {
-            _isPlayerTouchingDoor = true;
-        }
+        _isPlayerTouchingDoor = true;
+        Debug.Log("touching door");
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D col)
     {
-        throw new NotImplementedException();
+        _isPlayerTouchingDoor = false;
+
     }
 }

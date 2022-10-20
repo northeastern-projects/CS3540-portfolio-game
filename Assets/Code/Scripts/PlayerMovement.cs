@@ -89,8 +89,6 @@ namespace Code.Scripts
             
             // Fall through platforms when holding down
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), _moveVertical < 0.0f);
-            Debug.Log("Player->Platform: " + Physics2D.GetIgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform")));
-            Debug.Log("Platform->Player: " + Physics2D.GetIgnoreLayerCollision(LayerMask.NameToLayer("Platform"), LayerMask.NameToLayer("Player")));
 
             if (_startDash && _canDash)
             {

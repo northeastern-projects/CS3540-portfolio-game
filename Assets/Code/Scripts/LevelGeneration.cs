@@ -11,37 +11,71 @@ public class LevelGeneration : MonoBehaviour
 
     public Transform[] startingPositions;
     public GameObject[] rooms; // index 0 - LR openings, 1 - LRB, 2 - LRT, 3 - LRTB
+    public GameObject[] specialRooms;
 
-    private int direction;    //integers representing the direction in which the next room will be placed
     public float moveAmount;    //corresponds to how far level generation must move to go to the next designated room (distance between each rooms center point)
 
     public float minX;
     public float maxX;
     public float maxY;
-    private bool stopGeneratiion;
+    private bool stopGeneration;
 
     private float timeBtwRoom;
     public float startTimeBtwRoom = 15.00f;
 
-    private int roomsCount;
+    private int _startingPositionIndex;
+    private int _direction;
 
     public LayerMask room;  //this will be used with our roomDetection collider to make sure it can only collide with rooms
-    void Start()
+    
+    private void Start()
+    {
+        GeneratePath();
+        FillEmpty();
+    }
+    
+    private void GeneratePath()
     {
         //Randomly choose the starting position of our path (note we will be picking one of the 4 bottom tiles and traversing upwards
         
-        int randStartingPos = Random.Range(0, startingPositions.Length);
-        transform.position = startingPositions[randStartingPos].position;  
+        _startingPositionIndex = Random.Range(0, startingPositions.Length);
+        transform.position = startingPositions[_startingPositionIndex].position;  
         Instantiate(rooms[1], transform.position, Quaternion.identity);
+
+        //randomly assign direction to 1,2,3,4,5
+        // 1,2 = right
+        // 3,4 = left
+        // 5 = up
+        _direction = Random.Range(1, 6);
         
-        //randomly assign direction to 1,2,3,4,5, or 6
-        direction = Random.Range(1, 6);
+        while (!stopGeneration)
+        {
+            Move();
+        }
+    }
+
+    private void FillEmpty()
+    {
+        for (var x = minX; x <= maxX; x += moveAmount)
+        {
+            for (var y = startingPositions[_startingPositionIndex].position.y; y <= maxY; y += moveAmount)
+            {
+                var position = new Vector2(x, y);
+                bool roomPresent = Physics2D.OverlapCircle(position, 1, room);
+                if (!roomPresent)
+                {
+                    var randomRoom = specialRooms[Random.Range(0, specialRooms.Length)];
+                    Instantiate(randomRoom, position, Quaternion.identity);
+                }
+            }
+
+        }
     }
 
     private void Move()
     {
         //move depending on direction
-        if (direction == 1 || direction == 2)
+        if (_direction == 1 || _direction == 2)
         {
             if (transform.position.x < maxX)
             {
@@ -60,22 +94,22 @@ public class LevelGeneration : MonoBehaviour
                 //Thus for right we want to reassign direction, but ensure that the directions will only ever be
                 //right (1,2) or up(5)
                 
-                direction = Random.Range(1, 6);
-                if (direction == 3)
+                _direction = Random.Range(1, 6);
+                if (_direction == 3)
                 {
-                    direction = 2;
+                    _direction = 2;
                 }
-                else if (direction == 4)
+                else if (_direction == 4)
                 {
-                    direction = 5;
+                    _direction = 5;
                 }
             }
             else // We know level generation is at the right boundary so guarentee we move up by chagning direction
             {
-                direction = 5;
+                _direction = 5;
             }
         }
-        else if (direction == 3 || direction == 4)
+        else if (_direction == 3 || _direction == 4)
         {
             if (transform.position.x > minX)
             {
@@ -88,15 +122,15 @@ public class LevelGeneration : MonoBehaviour
                 Instantiate(rooms[randRoomType], transform.position, Quaternion.identity);
                 
                 //similar logic about generation in same direction as above
-                direction = Random.Range(3, 6);
+                _direction = Random.Range(3, 6);
             }
             else
             {
-                direction = 5;
+                _direction = 5;
             }
 
         }
-        else if (direction == 5)
+        else if (_direction == 5)
         {
             if (transform.position.y < maxY)
             {
@@ -107,13 +141,19 @@ public class LevelGeneration : MonoBehaviour
                 Collider2D roomDetection = Physics2D.OverlapCircle(transform.position, 1, room);
 
                 //if the current room doesn't have an opening at the top,  destroy it then replace it with a room that does
-                if (roomDetection.GetComponent<RoomType>().type != 2 &&
-                    roomDetection.GetComponent<RoomType>().type != 3)
+                var currentRoomType = roomDetection.GetComponent<RoomType>().type;
+                
+                // Convert LR -> LRT
+                if (currentRoomType == 0)
                 {
                     roomDetection.GetComponent<RoomType>().RoomDestruction();
-
-                    int randTopOpeningRoom = Random.Range(2, 4); //since 2 and 3 are our roomtypes with T openings
-                    Instantiate(rooms[randTopOpeningRoom], transform.position, Quaternion.identity);
+                    Instantiate(rooms[2], transform.position, Quaternion.identity);
+                } 
+                // Convert LRB -> LRTB
+                else if (currentRoomType == 1)
+                {
+                    roomDetection.GetComponent<RoomType>().RoomDestruction();
+                    Instantiate(rooms[3], transform.position, Quaternion.identity);
                 }
 
                 //Move Up only when we have not reached the top max of the level yet
@@ -129,11 +169,11 @@ public class LevelGeneration : MonoBehaviour
 
 
                 //if we just went up can go in any direction freely after
-                direction = Random.Range(1, 6);
+                _direction = Random.Range(1, 6);
             }
             else //if we are at max height and try to move up, we should stop level generation
             {
-                stopGeneratiion = true;
+                stopGeneration = true;
             }
 
         }
@@ -142,8 +182,9 @@ public class LevelGeneration : MonoBehaviour
 
     private void Update()
     {
+        /*
         //limit on how quickly we make rooms mostly for initial testing
-        if (timeBtwRoom <= 0 && stopGeneratiion == false)
+        if (timeBtwRoom <= 0 && stopGeneration == false)
         {
             Move();
             timeBtwRoom = startTimeBtwRoom;
@@ -152,5 +193,6 @@ public class LevelGeneration : MonoBehaviour
         {
             timeBtwRoom -= Time.deltaTime;
         }
+        */
     }
 }
