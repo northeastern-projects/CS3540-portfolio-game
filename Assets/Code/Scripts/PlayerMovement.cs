@@ -226,7 +226,7 @@ namespace Code.Scripts
             playerAnimator.SetTrigger(Attack1);
             // Detect which enemies are in range
             Collider2D[] hitEnemies =
-                Physics2D.OverlapCircleAll(attackPosition.position, attackRange);
+                Physics2D.OverlapCircleAll(attackPosition.position, attackRange, LayerMask.GetMask("Enemy"));
 
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
