@@ -39,6 +39,7 @@ namespace Code.Scripts
         private float _moveDirection;
         private float _moveVertical;
         private bool _startDash;
+		private bool _isSneaking;
         private bool _isJumping;
         private bool _isRunning;
         private bool _isOnLadder;
@@ -74,7 +75,7 @@ namespace Code.Scripts
             Animate();
             
             // Walking and Sprinting
-            var speed = _isRunning ? sprintSpeed : moveSpeed;
+            var speed = _isRunning ? sprintSpeed : _isSneaking ? moveSpeed / 2 : moveSpeed;
             rb.velocity = new Vector2(_moveDirection * speed, rb.velocity.y);
 
             // Ladder climbing
@@ -154,6 +155,7 @@ namespace Code.Scripts
             _moveVertical = Input.GetAxis("Vertical");
             _startDash = Input.GetKeyDown(KeyCode.LeftControl);
             _isRunning = Input.GetKey(KeyCode.LeftShift);
+			_isSneaking = Input.GetKey(KeyCode.RightShift);
             _startAttack = Input.GetMouseButtonDown(0);
         }
 
@@ -248,5 +250,13 @@ namespace Code.Scripts
 
             Gizmos.DrawWireSphere(attackPosition.position, attackRange);
         }
+
+		public string GetState()
+		{
+			if (_isDashing) { return "dashing"; }
+			if (_isRunning) { return "running"; }
+			if (_isSneaking) { return "sneaking"; }
+			return "walking";
+		}
     }
 }
