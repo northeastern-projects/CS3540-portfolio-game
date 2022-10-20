@@ -13,6 +13,8 @@ namespace Code.Scripts
         [SerializeField] [Tooltip("Insert Animator Controller")]
         private Animator playerAnimator;
 
+		//Attacking
+		[SerializeField] private int attackDamage = 20;
 
         // Dashing
         public float dashForce;
@@ -224,6 +226,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
+				enemy.GetComponent<Health>().Damage(attackDamage);
                 Debug.Log("Hit " + enemy.name);
             }
 
