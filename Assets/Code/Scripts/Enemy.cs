@@ -8,6 +8,7 @@ namespace Code.Scripts
     {
         [SerializeField] private EnemyData data;
         private bool canAttack = true;
+        private bool facingRight = false;
 
         // The player
         private GameObject player;
@@ -23,13 +24,24 @@ namespace Code.Scripts
         void Update()
         {
             Move();
+            FlipEnemy();
+        }
+
+        private void FlipEnemy()
+        {
+            if ((player.transform.position.x >= transform.position.x && !facingRight) || (player.transform.position.x < transform.position.x && facingRight))
+            {
+                Vector3 theScale = transform.localScale;
+                theScale.x *= -1;
+                transform.localScale = theScale;
+            }
         }
 
         private void Move()
         {
             if (Mathf.Abs(transform.position.x - player.transform.position.x) > data.buffer)
             {
-                transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, data.height),
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y),
                     data.moveSpeed * Time.deltaTime);
             }
         }
