@@ -13,8 +13,8 @@ namespace Code.Scripts
         [SerializeField] [Tooltip("Insert Animator Controller")]
         private Animator playerAnimator;
 
-		//Attacking
-		[SerializeField] private int attackDamage = 20;
+        //Attacking
+        [SerializeField] private int attackDamage = 20;
 
         // Dashing
         public float dashForce;
@@ -39,7 +39,7 @@ namespace Code.Scripts
         private float _moveDirection;
         private float _moveVertical;
         private bool _startDash;
-		private bool _isSneaking;
+        private bool _isSneaking;
         private bool _isJumping;
         private bool _isRunning;
         private bool _isOnLadder;
@@ -50,6 +50,7 @@ namespace Code.Scripts
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int Attack1 = Animator.StringToHash("AttackTrigger");
+        private static readonly int IsClimbing = Animator.StringToHash("isClimbing");
 
 
         // Awake is called after objects are initialized. Called in a random order
@@ -69,11 +70,11 @@ namespace Code.Scripts
             }
 
             ProcessInputs();
-            
+
             Move();
 
             Animate();
-            
+
             // Walking and Sprinting
             var speed = _isRunning ? sprintSpeed : _isSneaking ? moveSpeed / 2 : moveSpeed;
             rb.velocity = new Vector2(_moveDirection * speed, rb.velocity.y);
@@ -90,16 +91,17 @@ namespace Code.Scripts
                 rb.gravityScale = _rbGravity;
                 _isClimbingLadder = false;
             }
-            
+
             // Fall through platforms when holding down
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), _moveVertical < 0.0f);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"),
+                _moveVertical < 0.0f);
 
             if (_startDash && _canDash)
             {
                 StartCoroutine(Dash());
             }
 
-            if (_startAttack && _canAttack)
+            if (_startAttack && _canAttack && !_isClimbingLadder)
             {
                 StartCoroutine(Attack());
             }
@@ -115,6 +117,7 @@ namespace Code.Scripts
 
             playerAnimator.SetBool(IsJumping, _isJumping);
             playerAnimator.SetBool(IsRunning, _isRunning);
+            playerAnimator.SetBool(IsClimbing, _isClimbingLadder && rb.velocity.y != 0f);
             playerAnimator.SetBool(IsWalking, rb.velocity.x != 0.0f);
         }
 
@@ -129,20 +132,17 @@ namespace Code.Scripts
             {
                 FlipCharacter();
             }
-
-
         }
 
         private void Move()
         {
-            
             // Jumping
             var origin = rb.position;
             var layerMask = LayerMask.GetMask("Ground", "Platform");
-            bool grounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y/2, layerMask);
-            bool inPlatform = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y/2 - 0.3f, layerMask);
+            bool grounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2, layerMask);
+            bool inPlatform = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2 - 0.3f, layerMask);
             //Debug.Log($"Grounded: {grounded}, InPlatform: {inPlatform}");
-            
+
             if (Input.GetKeyDown("w") && grounded && !inPlatform)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
@@ -155,7 +155,7 @@ namespace Code.Scripts
             _moveVertical = Input.GetAxis("Vertical");
             _startDash = Input.GetKeyDown(KeyCode.LeftControl);
             _isRunning = Input.GetKey(KeyCode.LeftShift);
-			_isSneaking = Input.GetKey(KeyCode.RightShift);
+            _isSneaking = Input.GetKey(KeyCode.RightShift);
             _startAttack = Input.GetMouseButtonDown(0);
         }
 
@@ -233,7 +233,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-				enemy.GetComponent<Health>().Damage(attackDamage);
+                enemy.GetComponent<Health>().Damage(attackDamage);
                 Debug.Log("Hit " + enemy.name);
             }
 
@@ -251,12 +251,24 @@ namespace Code.Scripts
             Gizmos.DrawWireSphere(attackPosition.position, attackRange);
         }
 
-		public string GetState()
-		{
-			if (_isDashing) { return "dashing"; }
-			if (_isRunning) { return "running"; }
-			if (_isSneaking) { return "sneaking"; }
-			return "walking";
-		}
+        public string GetState()
+        {
+            if (_isDashing)
+            {
+                return "dashing";
+            }
+
+            if (_isRunning)
+            {
+                return "running";
+            }
+
+            if (_isSneaking)
+            {
+                return "sneaking";
+            }
+
+            return "walking";
+        }
     }
 }
