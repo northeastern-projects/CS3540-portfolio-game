@@ -45,6 +45,9 @@ namespace Code.Scripts
         private bool _isOnLadder;
         private bool _isClimbingLadder;
         private bool _startAttack;
+        private float _timeSinceGrounded;
+        private int _numJumps;
+        private bool _forgivenessJump;
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsDashing = Animator.StringToHash("isDashing");
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
@@ -141,11 +144,40 @@ namespace Code.Scripts
             var layerMask = LayerMask.GetMask("Ground", "Platform");
             bool grounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2, layerMask);
             bool inPlatform = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2 - 0.3f, layerMask);
+            
             //Debug.Log($"Grounded: {grounded}, InPlatform: {inPlatform}");
 
-            if (Input.GetKeyDown("w") && grounded && !inPlatform)
+            if (grounded)
+            {
+                _timeSinceGrounded = 0;
+                _numJumps = 1;
+                _forgivenessJump = true;
+            }
+            else
+            {
+                _timeSinceGrounded = _timeSinceGrounded + Time.deltaTime;
+            }
+
+            if (Input.GetKeyDown("w") && grounded && !inPlatform) 
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                _forgivenessJump = false;
+            }
+            else if (Input.GetKeyDown("w") && _timeSinceGrounded < 0.2f && !inPlatform && _forgivenessJump && _numJumps > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                _forgivenessJump = false;
+            }
+            else if (Input.GetKeyDown("w") && _timeSinceGrounded < 0.2f && !inPlatform && _numJumps > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                _numJumps = _numJumps - 1;
+            }
+            else if (Input.GetKeyDown("w") && _timeSinceGrounded >= 0.2f && _numJumps > 0)
+            {
+                _forgivenessJump = false;
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                _numJumps = _numJumps - 1;
             }
         }
 
