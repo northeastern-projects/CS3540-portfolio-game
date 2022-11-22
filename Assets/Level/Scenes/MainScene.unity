@@ -1447,6 +1447,14 @@ PrefabInstance:
       propertyPath: attackRange
       value: 1.23
       objectReference: {fileID: 0}
+    - target: {fileID: 3365550204355594980, guid: 700ebba7c362b4dd387744cbbae86287, type: 3}
+      propertyPath: attackCooldown
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365550204355594980, guid: 700ebba7c362b4dd387744cbbae86287, type: 3}
+      propertyPath: powerAttackCooldown
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3365550204355594981, guid: 700ebba7c362b4dd387744cbbae86287, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1495,6 +1503,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3365550204355594988, guid: 700ebba7c362b4dd387744cbbae86287, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3365550204355594989, guid: 700ebba7c362b4dd387744cbbae86287, type: 3}
       propertyPath: m_Size.x
       value: 0.586097

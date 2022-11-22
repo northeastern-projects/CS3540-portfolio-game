@@ -29,6 +29,8 @@ namespace Code.Scripts
         public float attackCooldown;
         public Transform attackPosition;
         public float attackRange;
+        private bool _canPowerAttack = true;
+        public float powerAttackCooldown;
 
         public Rigidbody2D rb;
         private float _rbGravity;
@@ -45,6 +47,7 @@ namespace Code.Scripts
         private bool _isOnLadder;
         private bool _isClimbingLadder;
         private bool _startAttack;
+        private bool _startPowerAttack;
         private float _timeSinceGrounded;
         private int _numJumps;
         private bool _forgivenessJump;
@@ -53,6 +56,7 @@ namespace Code.Scripts
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int Attack1 = Animator.StringToHash("AttackTrigger");
+        private static readonly int Attack2 = Animator.StringToHash("PowerAttack");
         private static readonly int IsClimbing = Animator.StringToHash("isClimbing");
 
 
@@ -107,6 +111,10 @@ namespace Code.Scripts
             if (_startAttack && _canAttack && !_isClimbingLadder)
             {
                 StartCoroutine(Attack());
+            }
+            if (_startPowerAttack && _canAttack && _canPowerAttack && !_isClimbingLadder)
+            {
+                StartCoroutine(PowerAttack());
             }
         }
 
@@ -189,6 +197,7 @@ namespace Code.Scripts
             _isRunning = Input.GetKey(KeyCode.LeftShift);
             _isSneaking = Input.GetKey(KeyCode.RightShift);
             _startAttack = Input.GetMouseButtonDown(0);
+            _startPowerAttack = Input.GetMouseButtonDown(1);
         }
 
         private void FlipCharacter()
@@ -271,6 +280,30 @@ namespace Code.Scripts
 
             yield return new WaitForSeconds(attackCooldown);
             _canAttack = true;
+        }
+        
+        private IEnumerator PowerAttack()
+        {
+            _canAttack = false;
+            _canPowerAttack = false;
+            playerAnimator.SetTrigger(Attack2);
+            // Detect which enemies are in range
+            Collider2D[] hitEnemies =
+                Physics2D.OverlapCircleAll(attackPosition.position, attackRange, LayerMask.GetMask("Enemy"));
+
+            // Damage detected enemies
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<Health>().Damage(attackDamage * 2);
+                Debug.Log("Hit " + enemy.name);
+            }
+
+            yield return new WaitForSeconds(attackCooldown);
+            _canAttack = true;
+            
+            yield return new WaitForSeconds(powerAttackCooldown);
+            _canPowerAttack = true;
+
         }
 
         private void OnDrawGizmosSelected()
