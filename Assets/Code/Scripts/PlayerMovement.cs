@@ -38,6 +38,10 @@ namespace Code.Scripts
         private CapsuleCollider2D _capsuleCollider;
         private bool _facingRight = true;
 
+        // sounds
+        [SerializeField] private AudioClip[] playerSounds;
+        private AudioSource _playerAs;
+        
         private float _moveDirection;
         private float _moveVertical;
         private bool _startDash;
@@ -63,6 +67,7 @@ namespace Code.Scripts
         // Awake is called after objects are initialized. Called in a random order
         private void Awake()
         {
+            _playerAs = GetComponent<AudioSource>();
             rb = GetComponent<Rigidbody2D>();
             _rbGravity = rb.gravityScale;
             _capsuleCollider = GetComponent<CapsuleCollider2D>();
@@ -316,6 +321,24 @@ namespace Code.Scripts
             Gizmos.DrawWireSphere(attackPosition.position, attackRange);
         }
 
+        public void footStep()
+            {
+                _playerAs.clip = playerSounds[0];
+                _playerAs.Play();
+            }
+        
+        public void attackSound()
+        {
+            _playerAs.clip = playerSounds[1];
+            _playerAs.Play();
+        }
+        
+        public void ladderClimb()
+        {
+            _playerAs.clip = playerSounds[2];
+            _playerAs.Play();
+        }
+        
         public string GetState()
         {
             if (_isDashing)
