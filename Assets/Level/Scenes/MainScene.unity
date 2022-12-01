@@ -1232,6 +1232,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1699344103638705779, guid: d2c1bb9a3b066bc438738771336b17d4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4116745675885226866, guid: d2c1bb9a3b066bc438738771336b17d4, type: 3}
       propertyPath: playerSounds.Array.size
       value: 3
@@ -1239,7 +1243,7 @@ PrefabInstance:
     - target: {fileID: 4116745675885226866, guid: d2c1bb9a3b066bc438738771336b17d4, type: 3}
       propertyPath: playerSounds.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 6e9856400c73e6041ad5082bca6c269c, type: 3}
+      objectReference: {fileID: 8300000, guid: 064dbd9122736554dbff8b5c060ecd29, type: 3}
     - target: {fileID: 4116745675885226866, guid: d2c1bb9a3b066bc438738771336b17d4, type: 3}
       propertyPath: playerSounds.Array.data[1]
       value: 
@@ -1248,6 +1252,10 @@ PrefabInstance:
       propertyPath: playerSounds.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: b865516068f7bfa478335953bd17600e, type: 3}
+    - target: {fileID: 4116745675885226867, guid: d2c1bb9a3b066bc438738771336b17d4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4116745675885226868, guid: d2c1bb9a3b066bc438738771336b17d4, type: 3}
       propertyPath: m_Name
       value: Sequoia
@@ -1302,7 +1310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5721872329393602703, guid: d2c1bb9a3b066bc438738771336b17d4, type: 3}
       propertyPath: m_Volume
-      value: 0.356
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5721872329393602703, guid: d2c1bb9a3b066bc438738771336b17d4, type: 3}
       propertyPath: m_PlayOnAwake
