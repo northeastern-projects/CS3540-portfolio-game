@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: FireAnt
   m_EditorClassIdentifier: 
   health: 250
-  damage: 30
+  damage: 3
   moveSpeed: 8
   attackSpeed: 12
+  buffer: 0
+  attackCooldown: 0

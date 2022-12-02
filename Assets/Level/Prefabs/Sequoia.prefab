@@ -833,6 +833,7 @@ MonoBehaviour:
   attackCooldown: 0
   attackPosition: {fileID: 2046745869112387879}
   attackRange: 4.65
+  powerAttackCooldown: 0
   rb: {fileID: 3365550204355594982}
 --- !u!95 &3365550204355594986
 Animator:
@@ -1008,6 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b84ad8f9a98ca45965907d70b24ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
   coinsText: {fileID: 0}
   heartsText: {fileID: 0}
 --- !u!114 &4983169288176155703
@@ -1022,7 +1024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6bac8cdb822455f9bd9029582d32de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  health: 10
+  maxHealth: 10
 --- !u!1 &3365550204570819902
 GameObject:
   m_ObjectHideFlags: 0

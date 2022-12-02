@@ -8,12 +8,13 @@ public class HeartStore : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            if(!PlayerManager.isFullHealth() && PlayerManager.numberOfCoins >= 2)
+            Health playerHealth = collision.GetComponent<Health>();
+            
+            if(!playerHealth.isFullHealth() && PlayerManager.Pay(2))
             {
                 
                 //make methods in PlayerManager to call for each of these kinda functions later
-                PlayerManager.numberOfHearts++;
-                PlayerManager.numberOfCoins -= 2;
+                playerHealth.Heal(1);
                 Destroy(gameObject);
             }
         }

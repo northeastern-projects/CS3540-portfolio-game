@@ -4,21 +4,44 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int health = 200;
+    [SerializeField] private int health;
+    [SerializeField] private int maxHealth;
     
     public void Damage(int amount)
     {
         this.health -= amount;
+        Debug.Log("took damage: " + amount);
         StartCoroutine(DamageEffect(Color.red));
         if (health <= 0)
         {
             Die();
         }
     }
+    
+    public void Heal(int amount)
+    {
+        this.health += amount;
+        Debug.Log("healed: " + amount);
+        StartCoroutine(DamageEffect(Color.green));
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
 
     public void SetHealth(int health)
     {
         this.health = health;
+    }
+    
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public bool isFullHealth()
+    {
+        return health == maxHealth;
     }
 
     private void Die()
