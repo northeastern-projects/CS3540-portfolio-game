@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -47,7 +48,8 @@ public class Health : MonoBehaviour
     private void Die()
     {
         Debug.Log("Dead!");
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        SceneManager.LoadScene(3);
     }
     
     private IEnumerator DamageEffect(Color color)
