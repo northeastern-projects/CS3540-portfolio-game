@@ -62,6 +62,7 @@ namespace Code.Scripts
         private static readonly int Attack1 = Animator.StringToHash("AttackTrigger");
         private static readonly int Attack2 = Animator.StringToHash("PowerAttack");
         private static readonly int IsClimbing = Animator.StringToHash("isClimbing");
+        private static int GroundPlatformMask;
 
 
         // Awake is called after objects are initialized. Called in a random order
@@ -71,6 +72,7 @@ namespace Code.Scripts
             rb = GetComponent<Rigidbody2D>();
             _rbGravity = rb.gravityScale;
             _capsuleCollider = GetComponent<CapsuleCollider2D>();
+            GroundPlatformMask = LayerMask.GetMask("Ground", "Platform");
         }
 
         // Update is called once per frame
@@ -154,9 +156,8 @@ namespace Code.Scripts
         {
             // Jumping
             var origin = rb.position;
-            var layerMask = LayerMask.GetMask("Ground", "Platform");
-            bool grounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2, layerMask);
-            bool inPlatform = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2 - 0.3f, layerMask);
+            bool grounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2, GroundPlatformMask);
+            bool inPlatform = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2 - 0.3f, GroundPlatformMask);
             
             //Debug.Log($"Grounded: {grounded}, InPlatform: {inPlatform}");
 
