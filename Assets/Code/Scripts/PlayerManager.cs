@@ -7,7 +7,6 @@ public class PlayerManager : MonoBehaviour
 {
     //initial values for coins and hearts
     public static int numberOfCoins = 0;
-
     public static int numberOfHearts = 2;
 
     public TextMeshProUGUI coinsText;

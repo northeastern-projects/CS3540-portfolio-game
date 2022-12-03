@@ -30,6 +30,10 @@ public class LevelGeneration : MonoBehaviour
     
     private void Start()
     {
+        var position = transform.position;
+        minX += position.x;
+        maxX += position.x;
+        maxY += position.y;
         GeneratePath();
         FillEmpty();
     }
