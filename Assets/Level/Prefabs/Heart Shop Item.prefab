@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8556935679705597610}
   - component: {fileID: 1885776424854443709}
   - component: {fileID: 4415837949295736493}
+  - component: {fileID: 7036299154605783402}
   m_Layer: 0
   m_Name: Heart Shop Item
   m_TagString: Untagged
@@ -111,3 +112,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.57, y: 4.54}
   m_EdgeRadius: 0
+--- !u!114 &7036299154605783402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659301730215029681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deba42cb65e7c894d9c7cedc9dc46176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

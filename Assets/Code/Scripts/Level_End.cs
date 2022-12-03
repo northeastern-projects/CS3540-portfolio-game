@@ -6,7 +6,7 @@ public class Level_End : MonoBehaviour
 {
     private bool _isPlayerTouchingDoor = false;
     private Rigidbody2D _player;
-
+    
     private void Awake()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();

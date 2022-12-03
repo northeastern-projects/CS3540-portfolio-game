@@ -8,11 +8,11 @@ public class AcornHelmetStore : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            if(PlayerManager.numberOfCoins >= 5)
+            if(PlayerManager.Pay(5))
             {
                 
-                //make methods in PlayerManager to call for each of these kinda functions later
-                PlayerManager.numberOfCoins -= 5;
+                //Make Helmet do something here
+
                 Destroy(gameObject);
             }
         }

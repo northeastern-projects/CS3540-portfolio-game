@@ -6,13 +6,13 @@ using Random = UnityEngine.Random;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private float spawnChance = 1.0f;
+    [SerializeField] private float spawnChance;
     [SerializeField] private GameObject[] items;
     
     // Start is called before the first frame update
     private void Start()
     {
-        if (Random.Range(0.0f, 1.0f) < spawnChance)
+        if (Random.Range(0.0f, 1.0f) <= spawnChance)
         {
             Instantiate(RandomItem(), transform);
         }
