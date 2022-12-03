@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
         numberOfHearts = playerHealth.GetHealth();
         coinsText.text = numberOfCoins.ToString();
         heartsText.text = numberOfHearts.ToString();
-        timerText.text = currentTime.ToString("000");
+        timerText.text = currentTime.ToString("0.00");
     }
     
     //Pays coins and return true on sucess, coins unchanaged and returns False if can't afford
