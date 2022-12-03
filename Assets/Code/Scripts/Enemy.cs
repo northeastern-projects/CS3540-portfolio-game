@@ -7,6 +7,7 @@ namespace Code.Scripts
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private EnemyData data;
+		private GameData gameData;
         private bool canAttack = true;
         private bool facingRight = false;
 
@@ -15,20 +16,28 @@ namespace Code.Scripts
 
         void Start()
         {
+			gameData = GameObject.Find("GameData").GetComponent<GameData>();
             GetComponent<Health>().SetHealth(data.health);
             player = GameObject.FindWithTag("Player");
-            //TODO: If no player, end the game.
         }
         
         // Update is called once per frame
         void Update()
         {
+			if (!gameData.started || gameData.paused || gameData.ended)
+			{
+				return;
+			}
             Move();
             FlipEnemy();
         }
 
         private void FlipEnemy()
         {
+			if (!player)
+			{
+				return;
+			}
             if ((player.transform.position.x >= transform.position.x && !facingRight) || (player.transform.position.x < transform.position.x && facingRight))
             {
                 Vector3 theScale = transform.localScale;
@@ -40,6 +49,10 @@ namespace Code.Scripts
 
         private void Move()
         {
+			if (!player)
+			{
+				return;
+			}
             if (Mathf.Abs(transform.position.x - player.transform.position.x) > data.buffer && player.GetComponent<PlayerMovement>().GetState() != "sneaking")
             {
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y),

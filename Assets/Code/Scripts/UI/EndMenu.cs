@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class StartMenu : MonoBehaviour
+public class EndMenu : MonoBehaviour
 {
-    private VisualElement root;
+    public VisualElement root;
 
     private Label callToAction;
     void Start()
@@ -17,14 +17,6 @@ public class StartMenu : MonoBehaviour
         Time.timeScale = 1;
         InvokeRepeating(nameof(blinkCallToAction), 0.25f, 0.25f);
 
-    }
-
-    void Update()
-    {
-        if (Input.anyKey)
-        {
-            SceneManager.LoadScene("Level/Scenes/MainScene");
-        }
     }
 
     void blinkCallToAction()

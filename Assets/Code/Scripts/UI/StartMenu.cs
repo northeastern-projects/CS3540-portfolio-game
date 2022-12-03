@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class EndMenu : MonoBehaviour
+public class StartMenu : MonoBehaviour
 {
-    private VisualElement root;
+    public VisualElement root;
 
     private Label callToAction;
     void Start()

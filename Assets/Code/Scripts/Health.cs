@@ -48,8 +48,7 @@ public class Health : MonoBehaviour
     private void Die()
     {
         Debug.Log("Dead!");
-        //Destroy(this.gameObject);
-        SceneManager.LoadScene(3);
+        Destroy(this.gameObject);
     }
     
     private IEnumerator DamageEffect(Color color)
