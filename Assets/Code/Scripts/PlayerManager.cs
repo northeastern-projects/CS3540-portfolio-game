@@ -11,9 +11,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Health playerHealth;
     //initial values for coins and hearts
     public static int numberOfCoins;
-
     public static int numberOfHearts;
-
     public float currentTime;
 
     public TextMeshProUGUI coinsText;
