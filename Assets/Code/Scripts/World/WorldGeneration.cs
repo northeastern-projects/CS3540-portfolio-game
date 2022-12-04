@@ -16,19 +16,15 @@ public class WorldGeneration : MonoBehaviour
     private GameObject _currentLevel;
     private GameObject _nextLevel;
     private AudioClip _nextTrack;
-    private Rigidbody2D _player;
+    private Rigidbody2D _playerRb;
 
     private int _numLevels;
     private Vector3 _nextLevelPosition;
-    
-    private void Awake()
-    {
-        _player = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
-    }
 
     // Start is called before the first frame update
     private void Start()
     {
+        _playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
         CreateNewLevel();
     }
 
@@ -40,7 +36,7 @@ public class WorldGeneration : MonoBehaviour
         musicPlayer.clip = _nextTrack;
         musicPlayer.Play();
         CreateNewLevel();
-        _player.transform.position += new Vector3(0.0f, 10.0f);
+        _playerRb.transform.position += new Vector3(0.0f, 10.0f);
     }
 
     private void CreateNewLevel()
@@ -61,10 +57,5 @@ public class WorldGeneration : MonoBehaviour
             _nextLevelPosition += new Vector3(0.0f, 120.0f);
         }
         _numLevels++;
-    }
-
-    private void CreateBossLevel()
-    {
-        
     }
 }
