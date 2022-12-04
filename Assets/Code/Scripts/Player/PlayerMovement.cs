@@ -307,7 +307,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Health>().Damage(attackDamage);
+                enemy.GetComponent<Health>().Damage((attackDamage + movementModifier.attackDamage));
                 Debug.Log("Hit " + enemy.name);
             }
 
@@ -327,7 +327,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Health>().Damage(attackDamage * 2);
+                enemy.GetComponent<Health>().Damage((attackDamage + movementModifier.attackDamage) * 2);
                 Debug.Log("Hit " + enemy.name);
             }
 

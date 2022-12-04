@@ -13,6 +13,7 @@ public class PlayerModifier : ScriptableObject
     public float dashingCooldown;
     public float attackCooldown;
     public float attackRange;
+    public int attackDamage;
     public float powerAttackCooldown;
     
 }
