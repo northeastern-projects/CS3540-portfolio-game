@@ -12,6 +12,10 @@ PrefabInstance:
       value: Level3
       objectReference: {fileID: 0}
     - target: {fileID: 4101832185405556619, guid: 05b3c862230a043f78c1d229cd645f51, type: 3}
+      propertyPath: rooms.Array.data[0]
+      value: 
+      objectReference: {fileID: 7482833594563717937, guid: 114dceb3586e94b74baf7df4087db3dc, type: 3}
+    - target: {fileID: 4101832185405556619, guid: 05b3c862230a043f78c1d229cd645f51, type: 3}
       propertyPath: rooms.Array.data[3]
       value: 
       objectReference: {fileID: 2994385778521652043, guid: e18028bed860b4dbca66126be0500d4f, type: 3}
