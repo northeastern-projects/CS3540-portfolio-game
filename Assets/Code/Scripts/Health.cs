@@ -49,7 +49,7 @@ public class Health : MonoBehaviour
 
     public bool isFullHealth()
     {
-        return health == maxHealth;
+        return health >= maxHealth;
     }
 
     private void Die()

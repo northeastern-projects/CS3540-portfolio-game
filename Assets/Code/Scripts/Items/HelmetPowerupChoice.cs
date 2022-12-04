@@ -11,6 +11,9 @@ public class HelmetPowerupChoice : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
+            Health playerHealth = collision.GetComponent<Health>();
+            playerHealth.OverHeal(1);
+            
             //When this item is picked, print and destroy other objects
             Debug.Log("Chose Helmet");
             for (int i = 0; i < otherItems.Length; i++)
