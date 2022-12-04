@@ -63,6 +63,8 @@ namespace Code.Scripts
         private static readonly int Attack2 = Animator.StringToHash("PowerAttack");
         private static readonly int IsClimbing = Animator.StringToHash("isClimbing");
 
+		// Gamedata store
+		[SerializeField] private GameData gameData;
 
         // Awake is called after objects are initialized. Called in a random order
         private void Awake()
@@ -76,6 +78,10 @@ namespace Code.Scripts
         // Update is called once per frame
         private void Update()
         {
+			if (!gameData.started || gameData.paused || gameData.ended)
+			{
+				return;
+			}
             if (_isDashing)
             {
                 return;
