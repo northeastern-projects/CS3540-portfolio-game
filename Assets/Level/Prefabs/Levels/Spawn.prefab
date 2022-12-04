@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1940111955772004813}
   - component: {fileID: 714726124062238601}
   - component: {fileID: 9166134752160977380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor with Right Wall
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161553703204442211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.9, y: 3.25, z: -1}
+  m_LocalPosition: {x: 44.9, y: 3.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 2595527885847147865}
   - component: {fileID: 7266976534171412856}
   - component: {fileID: 5997787150668901473}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor with Left Wall
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -223,8 +223,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2022253489
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e1264f680309a4c4d8342ae59c5670a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -378,7 +378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7320264480338133281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.9379, y: 3.2501, z: -1}
+  m_LocalPosition: {x: 44.9379, y: 3.3, z: 0}
   m_LocalScale: {x: 0.7819844, y: 0.773104, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -454,11 +454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067663568734150617, guid: af02b865a2b874a79bcefde3309158d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.06
+      value: 29.82
       objectReference: {fileID: 0}
     - target: {fileID: 4067663568734150617, guid: af02b865a2b874a79bcefde3309158d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.14
+      value: 5.46
       objectReference: {fileID: 0}
     - target: {fileID: 4067663568734150617, guid: af02b865a2b874a79bcefde3309158d9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -491,6 +491,18 @@ PrefabInstance:
     - target: {fileID: 4067663568734150617, guid: af02b865a2b874a79bcefde3309158d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067663568734150618, guid: af02b865a2b874a79bcefde3309158d9, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067663568734150618, guid: af02b865a2b874a79bcefde3309158d9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1441630653
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533392383943900781, guid: af02b865a2b874a79bcefde3309158d9, type: 3}
+      propertyPath: m_ColliderMask.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af02b865a2b874a79bcefde3309158d9, type: 3}

@@ -44,7 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09b9ded66e8049a3b0dc114a1288746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLevels: 5
   levels:
   - {fileID: 3062462189736774074, guid: 05b3c862230a043f78c1d229cd645f51, type: 3}
-  - {fileID: 3062462189736774074, guid: 05b3c862230a043f78c1d229cd645f51, type: 3}
-  - {fileID: 3062462189736774074, guid: 05b3c862230a043f78c1d229cd645f51, type: 3}
+  - {fileID: 5641431003840835835, guid: db39c55cf007346d39c974a3fd637e8d, type: 3}
+  - {fileID: 4302611653999482318, guid: 7efe2d06b31dd41aca148a188a400991, type: 3}
+  levelTracks:
+  - {fileID: 8300000, guid: 0dd7ebcbf6ed54566b03e71cc7594df0, type: 3}
+  - {fileID: 8300000, guid: 1af42478a752245a28e418fa369ddf76, type: 3}
+  - {fileID: 8300000, guid: 8aa02ade62b054eaabb4a2ce2e117a93, type: 3}
+  bossLevels: []
+  musicPlayer: {fileID: 0}
