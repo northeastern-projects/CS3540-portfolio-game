@@ -897,7 +897,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4116745675885226868}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -931,7 +931,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.215308, y: 2.5}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.05
 --- !u!61 &4116745675885226875
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aaee86a8ecda1c459fcac9296d4e288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementModifier: {fileID: 11400000, guid: 2c5c2cb7281304acfbb161374f220ba6, type: 2}
   moveSpeed: 8
   sprintSpeed: 15
   jumpSpeed: 30
@@ -1026,6 +1027,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 064dbd9122736554dbff8b5c060ecd29, type: 3}
   - {fileID: 8300000, guid: eaaa085010103f94ba86003ea0787b67, type: 3}
   - {fileID: 8300000, guid: b865516068f7bfa478335953bd17600e, type: 3}
+  gameData: {fileID: 0}
 --- !u!114 &4116745675885226873
 MonoBehaviour:
   m_ObjectHideFlags: 0
