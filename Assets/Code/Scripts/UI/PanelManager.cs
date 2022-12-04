@@ -9,12 +9,18 @@ public class PanelManager : MonoBehaviour
     public UIDocument start;
     public UIDocument pause;
     public UIDocument end;
+    public UIDocument difficulty;
 
     public AudioClip startMusic;
     public AudioClip pauseMusic;
     public AudioClip endMusic;
 
     [SerializeField] private GameData gameData;
+    
+    [SerializeField] private EnemyData antData;
+    [SerializeField] private EnemyData beeData;
+    [SerializeField] private EnemyData fireAntData;
+    [SerializeField] private EnemyData yellowJacketData;
 
     private EventSystem _eventSystem;
     private AudioSource _musicPlayer;
@@ -26,6 +32,7 @@ public class PanelManager : MonoBehaviour
         _musicPlayer = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         _eventSystem.enabled = false;
         ShowPanel(start);
+        HidePanel(difficulty);
         HidePanel(pause);
         HidePanel(end);
         PlayMusic(startMusic);
@@ -33,13 +40,48 @@ public class PanelManager : MonoBehaviour
 
     void Update()
     {
-        if (!gameData.started && Input.GetKeyDown(KeyCode.Return))
+        if (!gameData.started && !gameData.onDifficultyScreen && Input.GetKeyDown(KeyCode.Return))
         {
-            gameData.started = true;
+            //Want to show difficulty then 
+            
+            gameData.onDifficultyScreen = true;
             HidePanel(start);
-            _eventSystem.enabled = true;
-            PlayMusic(_previousClip);
-            Debug.Log("started");
+            ShowPanel(difficulty);
+            Debug.Log("Showing difficulty");
+        }
+
+        if (gameData.onDifficultyScreen)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                HidePanel(difficulty);
+                
+                
+                gameData.started = true;
+                PlayerManager.startTimer();
+                _eventSystem.enabled = true;
+                
+                PlayMusic(_previousClip);
+                Debug.Log("gameStarted");
+                gameData.onDifficultyScreen = false;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                HidePanel(difficulty);
+                
+                antData.moveSpeed += 3;
+                beeData.moveSpeed += 3;
+                fireAntData.moveSpeed += 3;
+                yellowJacketData.moveSpeed += 3;
+                
+                
+                gameData.started = true;
+                PlayerManager.startTimer();
+                _eventSystem.enabled = true;
+                Debug.Log("gameStarted");
+                gameData.onDifficultyScreen = false;
+            }
         }
 
         if (gameData.started && !gameData.paused && Input.GetKeyDown(KeyCode.Escape))
@@ -63,6 +105,7 @@ public class PanelManager : MonoBehaviour
         if (!gameData.ended && !GameObject.FindWithTag("Player"))
         {
             gameData.ended = true;
+            LeaderboardManager.CheckBestTime();
             ShowPanel(end);
             _eventSystem.enabled = false;
             PlayMusic(endMusic);
