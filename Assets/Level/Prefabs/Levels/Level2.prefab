@@ -12,6 +12,10 @@ PrefabInstance:
       value: Level2
       objectReference: {fileID: 0}
     - target: {fileID: 4101832185405556619, guid: 05b3c862230a043f78c1d229cd645f51, type: 3}
+      propertyPath: rooms.Array.data[2]
+      value: 
+      objectReference: {fileID: 1350135243980726472, guid: f7c394af9ff8e45c08646e28549bf8de, type: 3}
+    - target: {fileID: 4101832185405556619, guid: 05b3c862230a043f78c1d229cd645f51, type: 3}
       propertyPath: specialRooms.Array.size
       value: 6
       objectReference: {fileID: 0}
