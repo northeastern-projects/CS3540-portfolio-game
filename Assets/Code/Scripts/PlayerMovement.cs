@@ -54,6 +54,7 @@ namespace Code.Scripts
         private bool _isRunning;
         private bool _isOnLadder;
         private bool _isClimbingLadder;
+        private bool _isTouchingDoor;
         private bool _startAttack;
         private bool _startPowerAttack;
         private float _timeSinceGrounded;
@@ -70,6 +71,7 @@ namespace Code.Scripts
 
 		// Gamedata store
 		[SerializeField] private GameData gameData;
+
 
         // Awake is called after objects are initialized. Called in a random order
         private void Awake()
@@ -179,20 +181,23 @@ namespace Code.Scripts
             }
             else
             {
-                _timeSinceGrounded = _timeSinceGrounded + Time.deltaTime;
+                _timeSinceGrounded += Time.deltaTime;
             }
 
+            // Don't jump when touching door
+            if (_isTouchingDoor) return;
+            
             if (Input.GetKeyDown("w") && _isGrounded && !inPlatform) 
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + movementModifier.jumpSpeed);
                 _forgivenessJump = false;
             }
-            else if (Input.GetKeyDown("w") && _timeSinceGrounded < 0.2f && !inPlatform && _forgivenessJump && _numJumps > 0)
+            else if (Input.GetKeyDown("w") && _timeSinceGrounded < 0.2f && _forgivenessJump && _numJumps > 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + movementModifier.jumpSpeed);
                 _forgivenessJump = false;
             }
-            else if (Input.GetKeyDown("w") && _timeSinceGrounded < 0.2f && !inPlatform && _numJumps > 0)
+            else if (Input.GetKeyDown("w") && _timeSinceGrounded < 0.2f && _numJumps > 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + movementModifier.jumpSpeed);
                 _numJumps = _numJumps - 1;
@@ -234,6 +239,10 @@ namespace Code.Scripts
             {
                 _isOnLadder = true;
             }
+            else if (collision.gameObject.CompareTag("Door"))
+            {
+                _isTouchingDoor = true;
+            }
         }
 
         private void OnTriggerStay2D(Collider2D collision)
@@ -246,6 +255,10 @@ namespace Code.Scripts
             {
                 _isOnLadder = true;
             }
+            else if (collision.gameObject.CompareTag("Door"))
+            {
+                _isTouchingDoor = true;
+            }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -257,6 +270,10 @@ namespace Code.Scripts
             else if (collision.gameObject.CompareTag("Ladder"))
             {
                 _isOnLadder = false;
+            }
+            else if (collision.gameObject.CompareTag("Door"))
+            {
+                _isTouchingDoor = false;
             }
         }
 

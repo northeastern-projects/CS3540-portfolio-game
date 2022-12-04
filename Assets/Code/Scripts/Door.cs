@@ -21,6 +21,7 @@ public class Door : MonoBehaviour
         {
             // Enter door (currently teleport up one floor)
             _player.position += teleportDistance;
+            _player.velocity = Vector2.zero;
             _isPlayerTouchingDoor = false;
         }
     }
@@ -33,6 +34,5 @@ public class Door : MonoBehaviour
     private void OnTriggerExit2D(Collider2D col)
     {
         _isPlayerTouchingDoor = false;
-
     }
 }

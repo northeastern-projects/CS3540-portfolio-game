@@ -1020,7 +1020,7 @@ MonoBehaviour:
   tr: {fileID: 4116745675885226874}
   attackCooldown: 0.4
   attackPosition: {fileID: 860971425663109297}
-  attackRange: 1.23
+  attackRange: 2
   powerAttackCooldown: 3
   rb: {fileID: 4116745675885226864}
   playerSounds:

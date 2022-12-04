@@ -1811,6 +1811,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2144188644972284156, guid: 21de9826405454aa099f4e64f077c93b, type: 3}
+      propertyPath: bossDoor
+      value: 
+      objectReference: {fileID: 21300000, guid: 58dd7c82476a64fcaa4125177fa74cc7, type: 3}
+    - target: {fileID: 2144188644972284156, guid: 21de9826405454aa099f4e64f077c93b, type: 3}
+      propertyPath: maxLevels
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144188644972284156, guid: 21de9826405454aa099f4e64f077c93b, type: 3}
       propertyPath: numLevels
       value: 10
       objectReference: {fileID: 0}
@@ -1818,6 +1826,22 @@ PrefabInstance:
       propertyPath: musicPlayer
       value: 
       objectReference: {fileID: 1750326127}
+    - target: {fileID: 2144188644972284156, guid: 21de9826405454aa099f4e64f077c93b, type: 3}
+      propertyPath: bossLevels.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144188644972284156, guid: 21de9826405454aa099f4e64f077c93b, type: 3}
+      propertyPath: bossTracks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144188644972284156, guid: 21de9826405454aa099f4e64f077c93b, type: 3}
+      propertyPath: bossLevels.Array.data[0]
+      value: 
+      objectReference: {fileID: 6826880119404966874, guid: d756bb0a47f80914f8fea4160083db37, type: 3}
+    - target: {fileID: 2144188644972284156, guid: 21de9826405454aa099f4e64f077c93b, type: 3}
+      propertyPath: bossTracks.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 660eb665b51b843479712484b602feb5, type: 3}
     - target: {fileID: 5416548883694541544, guid: 21de9826405454aa099f4e64f077c93b, type: 3}
       propertyPath: m_Name
       value: World

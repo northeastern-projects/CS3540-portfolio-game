@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2607096905594646514}
   m_Layer: 8
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,9 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportDistance: {x: 0, y: 10}
-  test:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!61 &2607096905594646514
 BoxCollider2D:
   m_ObjectHideFlags: 0
