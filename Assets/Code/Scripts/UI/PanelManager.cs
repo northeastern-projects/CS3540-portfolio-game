@@ -11,6 +11,10 @@ public class PanelManager : MonoBehaviour
     public UIDocument end;
     public UIDocument difficulty;
 
+    public AudioClip startMusic;
+    public AudioClip pauseMusic;
+    public AudioClip endMusic;
+
     [SerializeField] private GameData gameData;
     
     [SerializeField] private EnemyData antData;
@@ -18,16 +22,20 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private EnemyData fireAntData;
     [SerializeField] private EnemyData yellowJacketData;
 
-    private EventSystem eventSystem;
+    private EventSystem _eventSystem;
+    private AudioSource _musicPlayer;
+    private AudioClip _previousClip;
 
     void Start()
     {
-        eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        eventSystem.enabled = false;
+        _eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        _musicPlayer = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        _eventSystem.enabled = false;
         ShowPanel(start);
         HidePanel(difficulty);
         HidePanel(pause);
         HidePanel(end);
+        PlayMusic(startMusic);
     }
 
     void Update()
@@ -51,7 +59,9 @@ public class PanelManager : MonoBehaviour
                 
                 gameData.started = true;
                 PlayerManager.startTimer();
-                eventSystem.enabled = true;
+                _eventSystem.enabled = true;
+                
+                PlayMusic(_previousClip);
                 Debug.Log("gameStarted");
                 gameData.onDifficultyScreen = false;
             }
@@ -68,7 +78,7 @@ public class PanelManager : MonoBehaviour
                 
                 gameData.started = true;
                 PlayerManager.startTimer();
-                eventSystem.enabled = true;
+                _eventSystem.enabled = true;
                 Debug.Log("gameStarted");
                 gameData.onDifficultyScreen = false;
             }
@@ -78,7 +88,8 @@ public class PanelManager : MonoBehaviour
         {
             gameData.paused = true;
             ShowPanel(pause);
-            eventSystem.enabled = false;
+            _eventSystem.enabled = false;
+            PlayMusic(pauseMusic);
             Debug.Log("paused");
         }
 
@@ -86,7 +97,8 @@ public class PanelManager : MonoBehaviour
         {
             gameData.paused = false;
             HidePanel(pause);
-            eventSystem.enabled = true;
+            _eventSystem.enabled = true;
+            PlayMusic(_previousClip);
             Debug.Log("unpaused");
         }
 
@@ -95,9 +107,17 @@ public class PanelManager : MonoBehaviour
             gameData.ended = true;
             LeaderboardManager.CheckBestTime();
             ShowPanel(end);
-            eventSystem.enabled = false;
+            _eventSystem.enabled = false;
+            PlayMusic(endMusic);
             Debug.Log("end");
         }
+    }
+
+    private void PlayMusic(AudioClip clip)
+    {
+        _previousClip = _musicPlayer.clip;
+        _musicPlayer.clip = clip;
+        _musicPlayer.Play();
     }
 
     private void ShowPanel(UIDocument panel)
