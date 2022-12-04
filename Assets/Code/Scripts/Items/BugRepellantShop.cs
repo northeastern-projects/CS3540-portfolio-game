@@ -12,8 +12,8 @@ public class BugRepellantShop : MonoBehaviour
             {
                 
                 //Get player's statmanager component and increase attack damage
-                //StatManager manager = collision.GetComponent<StatManager> 
-                //manager.AttackBuff();
+                PlayerModifier modifier = collision.GetComponent<PlayerModifier>();
+                modifier.attackDamage += 5;
                 
 
                 Destroy(gameObject);
