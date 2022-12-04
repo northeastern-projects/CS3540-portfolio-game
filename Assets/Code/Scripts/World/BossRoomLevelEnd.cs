@@ -6,18 +6,13 @@ public class BossRoomLevelEnd : MonoBehaviour
 {
     private bool _isPlayerTouchingDoor = false;
     private Rigidbody2D _player;
+    private LeaderboardManager leaderManager;
     
     private void Awake()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -27,6 +22,7 @@ public class BossRoomLevelEnd : MonoBehaviour
             if (PlayerManager.numKeys == 3)
             {
                 Debug.Log("Final Level Complete");
+
                 //Go To Leaderboard scene here
                 UnityEditor.EditorApplication.isPlaying = false;
             }
