@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5478641937039541689}
   - component: {fileID: 8691583349458592077}
   - component: {fileID: 5579377225200599621}
+  - component: {fileID: 1440431914943719788}
   m_Layer: 10
   m_Name: ant enemy
   m_TagString: Enemy
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: dff69a22ebaa24a3daae9c4cafeafad3, type: 2}
+  animator: {fileID: 1440431914943719788}
 --- !u!114 &5579377225200599621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +197,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+  maxHealth: 0
+--- !u!95 &1440431914943719788
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478641937039541668}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d9091b763520754993e84841099ab4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5478641937142093106
 GameObject:
   m_ObjectHideFlags: 0

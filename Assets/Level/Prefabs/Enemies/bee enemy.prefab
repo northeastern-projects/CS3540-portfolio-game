@@ -74,7 +74,9 @@ GameObject:
   - component: {fileID: 7555691377329652980}
   - component: {fileID: 7555691377329652977}
   - component: {fileID: 7555691377329652982}
+  - component: {fileID: 5390514079689561511}
   - component: {fileID: -3438423493409586850}
+  - component: {fileID: 2249466115738789592}
   m_Layer: 0
   m_Name: bee enemy
   m_TagString: Untagged
@@ -197,6 +199,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5390514079689561511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555691377329652981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6bac8cdb822455f9bd9029582d32de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
 --- !u!95 &-3438423493409586850
 Animator:
   serializedVersion: 4
@@ -217,6 +233,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2249466115738789592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555691377329652981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d964e97e0db45a3862ad18a0452438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 9f1cd4f3e3a5a4b1b84990f24168a699, type: 2}
+  animator: {fileID: -3438423493409586850}
 --- !u!1 &7555691377468522750
 GameObject:
   m_ObjectHideFlags: 0

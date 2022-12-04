@@ -427,7 +427,9 @@ GameObject:
   - component: {fileID: 1823977595220922868}
   - component: {fileID: 1823977595220922871}
   - component: {fileID: 1823977595220922870}
+  - component: {fileID: 8227519596894469455}
   - component: {fileID: -2098655954660750245}
+  - component: {fileID: 1002279397200465602}
   m_Layer: 0
   m_Name: fire ant enemy
   m_TagString: Untagged
@@ -557,6 +559,20 @@ MonoBehaviour:
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
+--- !u!114 &8227519596894469455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823977595220922867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6bac8cdb822455f9bd9029582d32de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
 --- !u!95 &-2098655954660750245
 Animator:
   serializedVersion: 4
@@ -577,3 +593,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1002279397200465602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823977595220922867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d964e97e0db45a3862ad18a0452438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 33ef85ced1a7f45748fe9c0389ee7617, type: 2}
+  animator: {fileID: -2098655954660750245}
