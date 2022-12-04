@@ -64,4 +64,9 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         GetComponent<SpriteRenderer>().color = Color.white;
     }
+
+    public void AddMaxHealth(int additionalHealth)
+    {
+        maxHealth += additionalHealth;
+    }
 }

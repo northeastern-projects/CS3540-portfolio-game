@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    
     //component for players health script
     [SerializeField] private Health playerHealth;
+
     //initial values for coins and hearts
     public static int acorns;
     public static int numberOfCoins;
@@ -30,14 +30,14 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-        
+
         numberOfHearts = playerHealth.GetHealth();
         acornText.text = acorns.ToString();
         coinsText.text = numberOfCoins.ToString();
         heartsText.text = numberOfHearts.ToString();
         timerText.text = currentTime.ToString("0.00");
     }
-    
+
     //Pays coins and return true on sucess, coins unchanaged and returns False if can't afford
     public static bool Pay(int amount)
     {
@@ -64,5 +64,13 @@ public class PlayerManager : MonoBehaviour
     {
         acorns++;
         PlayerPrefs.SetInt("acorns", acorns);
+    }
+
+    public static bool PayAcorns(int cost)
+    {
+        if (cost > acorns) return false;
+        acorns -= cost;
+        PlayerPrefs.SetInt("acorns", acorns);
+        return true;
     }
 }

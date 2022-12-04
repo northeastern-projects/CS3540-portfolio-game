@@ -1076,6 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 5958981825181801889}
+  acornText: {fileID: 0}
   coinsText: {fileID: 0}
   heartsText: {fileID: 0}
   timerText: {fileID: 0}

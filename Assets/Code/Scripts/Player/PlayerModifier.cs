@@ -15,5 +15,17 @@ public class PlayerModifier : ScriptableObject
     public float attackRange;
     public int attackDamage;
     public float powerAttackCooldown;
-    
+
+    public void AddModifier(PlayerModifier modifier)
+    {
+        moveSpeed += modifier.moveSpeed;
+        sprintSpeed += modifier.sprintSpeed;
+        jumpSpeed += modifier.jumpSpeed;
+        dashForce += modifier.dashForce;
+        dashingCooldown += modifier.dashingCooldown;
+        attackCooldown += modifier.attackCooldown;
+        attackRange += modifier.attackRange;
+        attackDamage += modifier.attackDamage;
+        powerAttackCooldown += modifier.powerAttackCooldown;
+    }
 }

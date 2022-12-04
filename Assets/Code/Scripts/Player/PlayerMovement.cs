@@ -7,7 +7,7 @@ namespace Code.Scripts
     public class PlayerMovement : MonoBehaviour
     {
 		//Plug in the values for movement modification
-		[SerializeField] private PlayerModifier movementModifier;
+		[SerializeField] public PlayerModifier movementModifier;
 
         public float moveSpeed;
         public float sprintSpeed;
