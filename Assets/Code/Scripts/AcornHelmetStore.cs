@@ -8,11 +8,12 @@ public class AcornHelmetStore : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            if(PlayerManager.Pay(5))
+            Health playerHealth = collision.GetComponent<Health>();
+            if(PlayerManager.Pay(10))
             {
                 
-                //Make Helmet do something here
-
+                //Make Helmet can heal more than maximum health but ony for 1 hp
+                playerHealth.OverHeal(1);
                 Destroy(gameObject);
             }
         }
