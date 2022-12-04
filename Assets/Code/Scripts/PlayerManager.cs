@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public static int numberOfCoins;
     public static int numberOfHearts;
     public float currentTime;
+    public static int numKeys = 0;
 
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI heartsText;
