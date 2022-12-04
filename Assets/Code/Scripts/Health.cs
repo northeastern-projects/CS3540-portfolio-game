@@ -29,6 +29,13 @@ public class Health : MonoBehaviour
             health = maxHealth;
         }
     }
+    
+    public void OverHeal(int amount)
+    {
+        this.health += amount;
+        Debug.Log("Overhealed: " + amount);
+        StartCoroutine(DamageEffect(Color.green));
+    }
 
     public void SetHealth(int health)
     {
