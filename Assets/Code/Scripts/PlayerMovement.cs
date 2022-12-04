@@ -6,6 +6,9 @@ namespace Code.Scripts
 {
     public class PlayerMovement : MonoBehaviour
     {
+		//Plug in the values for movement modification
+		[SerializeField] private PlayerModifier movementModifier;
+
         public float moveSpeed;
         public float sprintSpeed;
         public float jumpSpeed;
@@ -65,6 +68,8 @@ namespace Code.Scripts
         private static readonly int IsClimbing = Animator.StringToHash("isClimbing");
         private static int GroundPlatformMask;
 
+		// Gamedata store
+		[SerializeField] private GameData gameData;
 
         // Awake is called after objects are initialized. Called in a random order
         private void Awake()
@@ -79,6 +84,10 @@ namespace Code.Scripts
         // Update is called once per frame
         private void Update()
         {
+			if (!gameData.started || gameData.paused || gameData.ended)
+			{
+				return;
+			}
             if (_isDashing)
             {
                 return;
@@ -91,7 +100,7 @@ namespace Code.Scripts
             Animate();
 
             // Walking and Sprinting
-            var speed = _isRunning ? sprintSpeed : _isSneaking ? moveSpeed / 2 : moveSpeed;
+            var speed = _isRunning ? sprintSpeed + movementModifier.sprintSpeed : _isSneaking ? (moveSpeed + movementModifier.moveSpeed) / 2 : moveSpeed + movementModifier.moveSpeed;
             rb.velocity = new Vector2(_moveDirection * speed, rb.velocity.y);
 
             // Ladder climbing
@@ -175,23 +184,23 @@ namespace Code.Scripts
 
             if (Input.GetKeyDown("w") && _isGrounded && !inPlatform) 
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + movementModifier.jumpSpeed);
                 _forgivenessJump = false;
             }
             else if (Input.GetKeyDown("w") && _timeSinceGrounded < 0.2f && !inPlatform && _forgivenessJump && _numJumps > 0)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + movementModifier.jumpSpeed);
                 _forgivenessJump = false;
             }
             else if (Input.GetKeyDown("w") && _timeSinceGrounded < 0.2f && !inPlatform && _numJumps > 0)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + movementModifier.jumpSpeed);
                 _numJumps = _numJumps - 1;
             }
             else if (Input.GetKeyDown("w") && _timeSinceGrounded >= 0.2f && _numJumps > 0)
             {
                 _forgivenessJump = false;
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + movementModifier.jumpSpeed);
                 _numJumps = _numJumps - 1;
             }
         }
@@ -258,7 +267,7 @@ namespace Code.Scripts
             playerAnimator.SetBool(IsDashing, true);
             float originalGravity = rb.gravityScale;
             rb.gravityScale = 0f;
-            rb.velocity = _facingRight ? new Vector2(dashForce, 0f) : new Vector2(-dashForce, 0f);
+            rb.velocity = _facingRight ? new Vector2(dashForce + movementModifier.dashForce, 0f) : new Vector2(-dashForce - movementModifier.dashForce, 0f);
             tr.emitting = true;
             yield return new WaitForSeconds(DashTime);
             // ReSharper disable once Unity.InefficientPropertyAccess
@@ -266,7 +275,7 @@ namespace Code.Scripts
             rb.gravityScale = originalGravity;
             _isDashing = false;
             playerAnimator.SetBool(IsDashing, false);
-            yield return new WaitForSeconds(dashingCooldown);
+            yield return new WaitForSeconds(dashingCooldown + movementModifier.dashingCooldown);
             _canDash = true;
         }
 
@@ -276,7 +285,7 @@ namespace Code.Scripts
             playerAnimator.SetTrigger(Attack1);
             // Detect which enemies are in range
             Collider2D[] hitEnemies =
-                Physics2D.OverlapCircleAll(attackPosition.position, attackRange, LayerMask.GetMask("Enemy"));
+                Physics2D.OverlapCircleAll(attackPosition.position, attackRange + movementModifier.attackRange, LayerMask.GetMask("Enemy"));
 
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
@@ -285,7 +294,7 @@ namespace Code.Scripts
                 Debug.Log("Hit " + enemy.name);
             }
 
-            yield return new WaitForSeconds(attackCooldown);
+            yield return new WaitForSeconds(attackCooldown + movementModifier.attackCooldown);
             _canAttack = true;
         }
         
@@ -296,7 +305,7 @@ namespace Code.Scripts
             playerAnimator.SetTrigger(Attack2);
             // Detect which enemies are in range
             Collider2D[] hitEnemies =
-                Physics2D.OverlapCircleAll(attackPosition.position, attackRange, LayerMask.GetMask("Enemy"));
+                Physics2D.OverlapCircleAll(attackPosition.position, attackRange + movementModifier.attackRange, LayerMask.GetMask("Enemy"));
 
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
@@ -305,10 +314,10 @@ namespace Code.Scripts
                 Debug.Log("Hit " + enemy.name);
             }
 
-            yield return new WaitForSeconds(attackCooldown);
+            yield return new WaitForSeconds(attackCooldown + movementModifier.attackCooldown);
             _canAttack = true;
             
-            yield return new WaitForSeconds(powerAttackCooldown);
+            yield return new WaitForSeconds(powerAttackCooldown + movementModifier.powerAttackCooldown);
             _canPowerAttack = true;
 
         }
@@ -320,7 +329,7 @@ namespace Code.Scripts
                 return;
             }
 
-            Gizmos.DrawWireSphere(attackPosition.position, attackRange);
+            Gizmos.DrawWireSphere(attackPosition.position, attackRange + movementModifier.attackRange);
         }
 
         public void footStep()
