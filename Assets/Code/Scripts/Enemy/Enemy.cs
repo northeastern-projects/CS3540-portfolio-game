@@ -103,7 +103,7 @@ namespace Code.Scripts
             }
         }
 
-        private void OnTriggerExit(Collider2D collider)
+        private void OnTriggerExit2D(Collider2D collider)
         {
             if (collider.CompareTag("Player"))
             {
