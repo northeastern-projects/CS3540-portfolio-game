@@ -136,30 +136,30 @@ public class LevelGeneration : MonoBehaviour
         }
         else if (_direction == 5)
         {
+
+            //When levelGeneration moves vertically, need to make sure the room we are currently in has top openings
+            //and the room above will have a bottom opening  We will use roomDetection and the RoomDestruction 
+            //defined in Roomtype to ensure this
+
+            Collider2D roomDetection = Physics2D.OverlapCircle(transform.position, 1, room);
+
+            //if the current room doesn't have an opening at the top,  destroy it then replace it with a room that does
+            var currentRoomType = roomDetection.GetComponent<RoomType>().type;
+            
+            // Convert LR -> LRT
+            if (currentRoomType == 0)
+            {
+                roomDetection.GetComponent<RoomType>().RoomDestruction();
+                CreateRoom(2);
+            } 
+            // Convert LRB -> LRTB
+            else if (currentRoomType == 1)
+            {
+                roomDetection.GetComponent<RoomType>().RoomDestruction();
+                CreateRoom(3);
+            }
             if (transform.position.y < maxY)
             {
-                //When levelGeneration moves vertically, need to make sure the room we are currently in has top openings
-                //and the room above will have a bottom opening  We will use roomDetection and the RoomDestruction 
-                //defined in Roomtype to ensure this
-
-                Collider2D roomDetection = Physics2D.OverlapCircle(transform.position, 1, room);
-
-                //if the current room doesn't have an opening at the top,  destroy it then replace it with a room that does
-                var currentRoomType = roomDetection.GetComponent<RoomType>().type;
-                
-                // Convert LR -> LRT
-                if (currentRoomType == 0)
-                {
-                    roomDetection.GetComponent<RoomType>().RoomDestruction();
-                    CreateRoom(2);
-                } 
-                // Convert LRB -> LRTB
-                else if (currentRoomType == 1)
-                {
-                    roomDetection.GetComponent<RoomType>().RoomDestruction();
-                    CreateRoom(3);
-                }
-
                 //Move Up only when we have not reached the top max of the level yet
                 Vector2 newPos = new Vector2(transform.position.x, transform.position.y + moveAmount);
                 transform.position = newPos;
