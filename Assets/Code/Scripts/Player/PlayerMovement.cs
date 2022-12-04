@@ -7,7 +7,7 @@ namespace Code.Scripts
     public class PlayerMovement : MonoBehaviour
     {
 		//Plug in the values for movement modification
-		[SerializeField] private PlayerModifier movementModifier;
+		[SerializeField] public PlayerModifier movementModifier;
 
         public float moveSpeed;
         public float sprintSpeed;
@@ -307,7 +307,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Health>().Damage(attackDamage);
+                enemy.GetComponent<Health>().Damage((attackDamage + movementModifier.attackDamage));
                 Debug.Log("Hit " + enemy.name);
             }
 
@@ -327,7 +327,7 @@ namespace Code.Scripts
             // Damage detected enemies
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Health>().Damage(attackDamage * 2);
+                enemy.GetComponent<Health>().Damage((attackDamage + movementModifier.attackDamage) * 2);
                 Debug.Log("Hit " + enemy.name);
             }
 

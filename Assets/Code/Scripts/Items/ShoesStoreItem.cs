@@ -15,8 +15,9 @@ public class ShoesStoreItem : MonoBehaviour
             {
                 
                 //Get player's statmanager component and increase attack damage
-                //PlayerMovement speedBoost = collision.GetComponent<PlayerMovement>();
-                //speedBoost.addBoost();
+                PlayerModifier modifier = collision.GetComponent<PlayerMovement>().movementModifier;
+                modifier.moveSpeed += 1;
+                modifier.sprintSpeed += 2;
                 
 
                 Destroy(gameObject);

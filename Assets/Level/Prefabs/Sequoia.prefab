@@ -790,6 +790,7 @@ GameObject:
   - component: {fileID: 4116745675885226876}
   - component: {fileID: 4116745675885226874}
   - component: {fileID: 5721872329393602703}
+  - component: {fileID: 2143684681}
   m_Layer: 3
   m_Name: Sequoia
   m_TagString: Player
@@ -957,7 +958,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.586097, y: 0.029999971}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.1
 --- !u!114 &4116745675885226865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,7 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 5958981825181801889}
-  currentTime: 0
+  acornText: {fileID: 0}
   coinsText: {fileID: 0}
   heartsText: {fileID: 0}
   timerText: {fileID: 0}
@@ -1091,7 +1092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6bac8cdb822455f9bd9029582d32de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 10
   maxHealth: 10
 --- !u!95 &4116745675885226876
 Animator:
@@ -1317,6 +1318,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2143684681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4116745675885226868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff56fbbfdacd589408c62e125bfab9ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4116745675982837101
 GameObject:
   m_ObjectHideFlags: 0

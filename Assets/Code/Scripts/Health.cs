@@ -49,7 +49,7 @@ public class Health : MonoBehaviour
 
     public bool isFullHealth()
     {
-        return health == maxHealth;
+        return health >= maxHealth;
     }
 
     private void Die()
@@ -63,5 +63,10 @@ public class Health : MonoBehaviour
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.1f);
         GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void AddMaxHealth(int additionalHealth)
+    {
+        maxHealth += additionalHealth;
     }
 }

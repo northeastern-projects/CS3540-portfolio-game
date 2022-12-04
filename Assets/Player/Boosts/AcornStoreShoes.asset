@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8df9fb26c284403b94aa09bfc12ce80, type: 3}
+  m_Name: AcornStoreShoes
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  sprintSpeed: 2
+  jumpSpeed: 2
+  dashForce: 0
+  dashingCooldown: 0
+  attackCooldown: 0
+  attackRange: 0
+  attackDamage: 0
+  powerAttackCooldown: 0

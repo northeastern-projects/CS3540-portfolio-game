@@ -22,10 +22,4 @@ public class ItemSpawner : MonoBehaviour
     {
         return items[Random.Range(0, items.Length)];
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
 }
