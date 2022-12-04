@@ -45,6 +45,7 @@ namespace Code.Scripts
         private float _moveDirection;
         private float _moveVertical;
         private bool _startDash;
+        private bool _isGrounded;
         private bool _isSneaking;
         private bool _isJumping;
         private bool _isRunning;
@@ -134,7 +135,7 @@ namespace Code.Scripts
             }
 
             playerAnimator.SetBool(IsJumping, _isJumping);
-            playerAnimator.SetBool(IsRunning, _isRunning);
+            playerAnimator.SetBool(IsRunning, rb.velocity.x != 0.0f && _isRunning);
             playerAnimator.SetBool(IsClimbing, _isClimbingLadder && rb.velocity.y != 0f);
             playerAnimator.SetBool(IsWalking, rb.velocity.x != 0.0f);
         }
@@ -156,12 +157,12 @@ namespace Code.Scripts
         {
             // Jumping
             var origin = rb.position;
-            bool grounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2, GroundPlatformMask);
+            _isGrounded = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2, GroundPlatformMask);
             bool inPlatform = Physics2D.Raycast(origin, Vector2.down, _capsuleCollider.size.y / 2 - 0.3f, GroundPlatformMask);
             
             //Debug.Log($"Grounded: {grounded}, InPlatform: {inPlatform}");
 
-            if (grounded)
+            if (_isGrounded)
             {
                 _timeSinceGrounded = 0;
                 _numJumps = 1;
@@ -172,7 +173,7 @@ namespace Code.Scripts
                 _timeSinceGrounded = _timeSinceGrounded + Time.deltaTime;
             }
 
-            if (Input.GetKeyDown("w") && grounded && !inPlatform) 
+            if (Input.GetKeyDown("w") && _isGrounded && !inPlatform) 
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
                 _forgivenessJump = false;
@@ -323,10 +324,13 @@ namespace Code.Scripts
         }
 
         public void footStep()
-            {
-                _playerAs.clip = playerSounds[0];
-                _playerAs.Play();
-            }
+        {
+            if (!_isGrounded)
+                return;
+            
+            _playerAs.clip = playerSounds[0];
+            _playerAs.Play();
+        }
         
         public void attackSound()
         {

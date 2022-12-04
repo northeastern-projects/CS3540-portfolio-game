@@ -14,14 +14,7 @@ public class Door : MonoBehaviour
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (_isPlayerTouchingDoor && Input.GetKeyDown("w"))
@@ -35,7 +28,6 @@ public class Door : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         _isPlayerTouchingDoor = true;
-        Debug.Log("touching door");
     }
 
     private void OnTriggerExit2D(Collider2D col)

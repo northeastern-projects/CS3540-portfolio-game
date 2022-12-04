@@ -44,7 +44,7 @@ public class LevelGeneration : MonoBehaviour
         
         _startingPositionIndex = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[_startingPositionIndex].position;  
-        Instantiate(rooms[1], transform.position, Quaternion.identity);
+        CreateRoom(1);
 
         //randomly assign direction to 1,2,3,4,5
         // 1,2 = right
@@ -69,7 +69,7 @@ public class LevelGeneration : MonoBehaviour
                 if (!roomPresent)
                 {
                     var randomRoom = specialRooms[Random.Range(0, specialRooms.Length)];
-                    Instantiate(randomRoom, position, Quaternion.identity);
+                    Instantiate(randomRoom, position, Quaternion.identity, transform.parent);
                 }
             }
 
@@ -90,7 +90,7 @@ public class LevelGeneration : MonoBehaviour
                 //We don't really care what kind of openings our room has as we move horizontally since every room has LR
                 //so pick a random roomType and Instantiate
                 int randRoomType = Random.Range(0, rooms.Length);
-                Instantiate(rooms[randRoomType], transform.position, Quaternion.identity);
+                CreateRoom(randRoomType);
                 
                 //When generating rooms we want to move in the same direction on each level (right or left)
                 //before moving to the above level and repeating the process
@@ -123,7 +123,7 @@ public class LevelGeneration : MonoBehaviour
                 
                 //same logic on room type as above
                 int randRoomType = Random.Range(0, rooms.Length);
-                Instantiate(rooms[randRoomType], transform.position, Quaternion.identity);
+                CreateRoom(randRoomType);
                 
                 //similar logic about generation in same direction as above
                 _direction = Random.Range(3, 6);
@@ -151,13 +151,13 @@ public class LevelGeneration : MonoBehaviour
                 if (currentRoomType == 0)
                 {
                     roomDetection.GetComponent<RoomType>().RoomDestruction();
-                    Instantiate(rooms[2], transform.position, Quaternion.identity);
+                    CreateRoom(2);
                 } 
                 // Convert LRB -> LRTB
                 else if (currentRoomType == 1)
                 {
                     roomDetection.GetComponent<RoomType>().RoomDestruction();
-                    Instantiate(rooms[3], transform.position, Quaternion.identity);
+                    CreateRoom(3);
                 }
 
                 //Move Up only when we have not reached the top max of the level yet
@@ -169,8 +169,8 @@ public class LevelGeneration : MonoBehaviour
                 {
                     rand = 1;
                 }
-                Instantiate(rooms[rand], transform.position, Quaternion.identity);
-
+                
+                CreateRoom(rand);
 
                 //if we just went up can go in any direction freely after
                 _direction = Random.Range(1, 6);
@@ -184,19 +184,8 @@ public class LevelGeneration : MonoBehaviour
 
     }
 
-    private void Update()
+    private void CreateRoom(int index)
     {
-        /*
-        //limit on how quickly we make rooms mostly for initial testing
-        if (timeBtwRoom <= 0 && stopGeneration == false)
-        {
-            Move();
-            timeBtwRoom = startTimeBtwRoom;
-        }
-        else
-        {
-            timeBtwRoom -= Time.deltaTime;
-        }
-        */
+        Instantiate(rooms[index], transform.position, Quaternion.identity, transform.parent);
     }
 }
