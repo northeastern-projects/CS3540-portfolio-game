@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     //initial values for coins and hearts
     public static int numberOfCoins;
     public static int numberOfHearts;
-    public float currentTime;
+    public static float currentTime;
     public static int numKeys = 0;
 
     public TextMeshProUGUI coinsText;
@@ -45,5 +45,10 @@ public class PlayerManager : MonoBehaviour
         }
 
         return paymentSuccess;
+    }
+
+    public static void startTimer()
+    {
+        currentTime = 0.0f;
     }
 }

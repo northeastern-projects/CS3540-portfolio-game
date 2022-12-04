@@ -9,8 +9,14 @@ public class PanelManager : MonoBehaviour
     public UIDocument start;
     public UIDocument pause;
     public UIDocument end;
+    public UIDocument difficulty;
 
     [SerializeField] private GameData gameData;
+    
+    [SerializeField] private EnemyData antData;
+    [SerializeField] private EnemyData beeData;
+    [SerializeField] private EnemyData fireAntData;
+    [SerializeField] private EnemyData yellowJacketData;
 
     private EventSystem eventSystem;
 
@@ -19,18 +25,53 @@ public class PanelManager : MonoBehaviour
         eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         eventSystem.enabled = false;
         ShowPanel(start);
+        HidePanel(difficulty);
         HidePanel(pause);
         HidePanel(end);
     }
 
     void Update()
     {
-        if (!gameData.started && Input.GetKeyDown(KeyCode.Return))
+        if (!gameData.started && !gameData.onDifficultyScreen && Input.GetKeyDown(KeyCode.Return))
         {
-            gameData.started = true;
+            //Want to show difficulty then 
+            
+            gameData.onDifficultyScreen = true;
             HidePanel(start);
-            eventSystem.enabled = true;
-            Debug.Log("started");
+            ShowPanel(difficulty);
+            Debug.Log("Showing difficulty");
+        }
+
+        if (gameData.onDifficultyScreen)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                HidePanel(difficulty);
+                
+                
+                gameData.started = true;
+                PlayerManager.startTimer();
+                eventSystem.enabled = true;
+                Debug.Log("gameStarted");
+                gameData.onDifficultyScreen = false;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                HidePanel(difficulty);
+                
+                antData.moveSpeed += 3;
+                beeData.moveSpeed += 3;
+                fireAntData.moveSpeed += 3;
+                yellowJacketData.moveSpeed += 3;
+                
+                
+                gameData.started = true;
+                PlayerManager.startTimer();
+                eventSystem.enabled = true;
+                Debug.Log("gameStarted");
+                gameData.onDifficultyScreen = false;
+            }
         }
 
         if (gameData.started && !gameData.paused && Input.GetKeyDown(KeyCode.Escape))
