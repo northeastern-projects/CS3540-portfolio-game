@@ -12,5 +12,6 @@ public class EnemyData : ScriptableObject
 
     //distance between player and enemy when enemy is attacking
     public float buffer;
+    public float heightBuffer;
     public float attackCooldown;
 }

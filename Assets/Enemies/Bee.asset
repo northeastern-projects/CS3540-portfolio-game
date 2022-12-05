@@ -17,4 +17,5 @@ MonoBehaviour:
   moveSpeed: 10
   attackSpeed: 15
   buffer: 0
+  heightBuffer: 3
   attackCooldown: 0

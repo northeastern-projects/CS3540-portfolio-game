@@ -26,8 +26,9 @@ namespace Code.Scripts
 			gameData = GameObject.Find("GameData").GetComponent<GameData>();
             GetComponent<Health>().SetHealth(data.health);
             player = GameObject.FindWithTag("Player");
+            transform.position = new Vector2(transform.position.x, transform.position.y + data.heightBuffer);
         }
-        
+
         // Update is called once per frame
         void Update()
         {
