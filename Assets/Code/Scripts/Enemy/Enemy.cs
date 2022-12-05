@@ -17,9 +17,8 @@ namespace Code.Scripts
         [SerializeField] private Animator animator;
         
         Rect rect = new Rect(0, 0, 300, 100);
-        Vector3 offset = new Vector3(0f, 0f, 0.5f);
+        Vector3 offset = new Vector3(0f, 0f, 0.25f);
         private int stackedEnemies = 0;
-        private bool labelDisplayed = false;
 
         void Start()
         {
@@ -97,13 +96,15 @@ namespace Code.Scripts
             {
                 StartCoroutine(Attack(collider));
             }
-            else
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.CompareTag("Enemy"))
             {
-                //enemies are stacking
                 stackedEnemies++;
             }
         }
-
         private void OnTriggerExit2D(Collider2D collider)
         {
             if (collider.CompareTag("Player"))
@@ -122,13 +123,20 @@ namespace Code.Scripts
             
             canAttack = true;
         }
-        
-        void DisplayLabel(int number)
+
+        void OnGUI()
         {
             Vector3 point = Camera.main.WorldToScreenPoint(transform.position + offset);
             rect.x = point.x;
-            rect.y = Screen.height - point.y - rect.height; // bottom left corner set to the 3D point
-            GUI.Label(rect, number.ToString()); // display its name, or other string
+            rect.y = Screen.height - point.y - rect.height;
+            if (stackedEnemies > 0)
+            {
+                GUI.Label(rect, stackedEnemies.ToString());
+            }
+            else
+            {
+                GUI.Label(rect, "");
+            }
         }
     }
 }

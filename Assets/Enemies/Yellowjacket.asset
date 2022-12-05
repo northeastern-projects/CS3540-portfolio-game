@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 300
   damage: 4
-  moveSpeed: 12
+  moveSpeed: 15
   attackSpeed: 16
   buffer: 0
-  heightBuffer: 3
+  heightBuffer: 2
   attackCooldown: 0
