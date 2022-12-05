@@ -33,8 +33,6 @@ public class LeaderboardManager : MonoBehaviour
         }
 
         fastestTime = timeOfLastRun;
-
-        Debug.Log("fastest time is: " + PlayerPrefs.GetFloat("fastestTime").ToString("0.00"));
     }
     
 }

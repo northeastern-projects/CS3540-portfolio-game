@@ -23,8 +23,9 @@ public class BossRoomLevelEnd : MonoBehaviour
             {
                 Debug.Log("Final Level Complete");
 
-                //Go To Leaderboard scene here
-                UnityEditor.EditorApplication.isPlaying = false;
+                Destroy(GameObject.FindWithTag("Player"));
+                LeaderboardManager.CheckBestTime();
+                
             }
         }
     }

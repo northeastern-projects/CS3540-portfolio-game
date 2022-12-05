@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class EndMenu : MonoBehaviour
@@ -24,7 +19,16 @@ public class EndMenu : MonoBehaviour
 
     private void Update()
     {
-        highScore.text = "Record Time: " + PlayerPrefs.GetFloat("fastestTime").ToString("0.00");
+        float fastestTime = PlayerPrefs.GetFloat("fastestTime");
+        if (fastestTime == 0.0f)
+        {
+            highScore.visible = false;
+        }
+        else
+        {
+            highScore.visible = true;
+        }
+        highScore.text = "Record Time: " + fastestTime.ToString("0.00");
     }
 
     void blinkCallToAction()

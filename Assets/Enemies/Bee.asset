@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Bee
   m_EditorClassIdentifier: 
   health: 175
-  damage: 2
+  damage: 1
   moveSpeed: 5
-  attackSpeed: 8
+  attackSpeed: 9
   buffer: 0
   heightBuffer: 2
   attackCooldown: 1

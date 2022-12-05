@@ -111,7 +111,6 @@ public class PanelManager : MonoBehaviour
         if (!gameData.ended && !GameObject.FindWithTag("Player"))
         {
             gameData.ended = true;
-            LeaderboardManager.CheckBestTime();
             ShowPanel(end);
             _eventSystem.enabled = false;
             PlayMusic(endMusic);
