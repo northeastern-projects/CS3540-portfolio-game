@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 3701098978059309735}
   - component: {fileID: -7913413994076535261}
   - component: {fileID: 3747009276656808708}
+  - component: {fileID: 6134536867946892599}
   m_Layer: 0
   m_Name: yellow jacket enemy
   m_TagString: Untagged
@@ -226,6 +227,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 0
+--- !u!70 &6134536867946892599
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330157774269424472}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.2, y: 0.15202512}
+  m_Size: {x: 7.6, y: 1.316068}
+  m_Direction: 1
 --- !u!1 &8330157774415457810
 GameObject:
   m_ObjectHideFlags: 0

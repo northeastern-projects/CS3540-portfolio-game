@@ -429,6 +429,7 @@ GameObject:
   - component: {fileID: 8227519596894469455}
   - component: {fileID: -2098655954660750245}
   - component: {fileID: 1002279397200465602}
+  - component: {fileID: -909205672586135036}
   m_Layer: 0
   m_Name: fire ant enemy
   m_TagString: Untagged
@@ -585,3 +586,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 33ef85ced1a7f45748fe9c0389ee7617, type: 2}
   animator: {fileID: -2098655954660750245}
+--- !u!70 &-909205672586135036
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823977595220922867}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.2, y: 0.15202512}
+  m_Size: {x: 7.6, y: 1.316068}
+  m_Direction: 1
