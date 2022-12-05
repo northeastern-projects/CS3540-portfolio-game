@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PanelManager : MonoBehaviour
 {
@@ -39,6 +40,11 @@ public class PanelManager : MonoBehaviour
     }
 
     void Update()
+    {
+        StartCoroutine(Screens());
+    }
+
+    IEnumerator Screens()
     {
         if (!gameData.started && !gameData.onDifficultyScreen && Input.GetKeyDown(KeyCode.Return))
         {
@@ -110,6 +116,9 @@ public class PanelManager : MonoBehaviour
             _eventSystem.enabled = false;
             PlayMusic(endMusic);
             Debug.Log("end");
+            
+            yield return new WaitForSeconds(5);
+            SceneManager.LoadScene( SceneManager.GetActiveScene().name );
         }
     }
 
