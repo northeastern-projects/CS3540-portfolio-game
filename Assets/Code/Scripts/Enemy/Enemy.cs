@@ -102,14 +102,14 @@ namespace Code.Scripts
         {
             if (collider.CompareTag("Enemy"))
             {
-                stackedEnemies++;
+                stackedEnemies = stackedEnemies + 1;
             }
         }
         private void OnTriggerExit2D(Collider2D collider)
         {
-            if (collider.CompareTag("Player"))
+            if (collider.CompareTag("Enemy"))
             {
-                stackedEnemies--;
+                stackedEnemies = stackedEnemies - 1;
             }
         }
 
