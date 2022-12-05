@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Yellowjacket
   m_EditorClassIdentifier: 
   health: 300
-  damage: 4
+  damage: 2
   moveSpeed: 15
   attackSpeed: 16
   buffer: 0

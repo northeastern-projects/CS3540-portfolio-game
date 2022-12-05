@@ -76,10 +76,10 @@ public class PanelManager : MonoBehaviour
             {
                 HidePanel(difficulty);
                 
-                antData.moveSpeed += 3;
-                beeData.moveSpeed += 3;
-                fireAntData.moveSpeed += 3;
-                yellowJacketData.moveSpeed += 3;
+                antData.moveSpeed += 1;
+                beeData.moveSpeed += 1;
+                fireAntData.moveSpeed += 1;
+                yellowJacketData.moveSpeed += 1;
                 
                 
                 gameData.started = true;
