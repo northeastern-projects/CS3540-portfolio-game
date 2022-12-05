@@ -15,7 +15,7 @@ MonoBehaviour:
   health: 175
   damage: 2
   moveSpeed: 5
-  attackSpeed: 7
+  attackSpeed: 8
   buffer: 0
   heightBuffer: 2
-  attackCooldown: 0
+  attackCooldown: 1
